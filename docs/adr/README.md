@@ -14,3 +14,4 @@ Decisões de arquitetura registradas. Uma por arquivo, numeradas. Status `aceito
 | [0008](0008-superficie-v1-landing-unica.md) | Superfície V1 — landing única | aceito |
 | [0009](0009-idioma-pt-br.md) | Idioma — pt-BR | aceito |
 | [0010](0010-independencia-entre-apps.md) | Independência entre apps | aceito |
+| [0011](0011-produto-primeiro-indicadores-secundarios.md) | Produto primeiro; indicadores secundários (correção de ênfase) | aceito |

@@ -9,11 +9,11 @@ Glossário e invariantes que definem a **linguagem comum** do panlabs. Lido por 
 ## Linguagem
 
 **Solução** (`Solution`):
-Um produto SaaS do autor exposto no panlabs. Tem identidade editorial **curada** no repo do panlabs e vitalidade **puxada do GitHub**. Não é hospedada pelo panlabs.
+Um produto SaaS do autor exposto no panlabs — **o assunto** da vitrine; tudo no card existe para apresentá-la. Tem identidade editorial **curada** no repo do panlabs e vitalidade **puxada do GitHub**. Não é hospedada pelo panlabs.
 _Evite_: "app do panlabs" — as soluções não pertencem ao panlabs.
 
 **Card**:
-A representação visual de uma Solução na landing. Mostra `status · tech-chips · stars · sparkline de commits · acessos` e a ação "visitar".
+A representação visual de uma **Solução** na landing. Prioridade, nesta ordem: **(1)** o **produto** — nome, o que é e um jeito de entrar (o herói do card); **(2)** a ação **"visitar"**; **(3)** **vitalidade** como prova-de-vida *secundária e discreta*. **Quais** indicadores, **quanto**, **onde** e com que **tratamento** (ex.: a ideia do screenshot esmaecido) são **forma — decisão do design, não deste documento.** Set de indicadores candidatos em [ADR-0005](adr/0005-indicadores.md); prioridade em [ADR-0011](adr/0011-produto-primeiro-indicadores-secundarios.md).
 
 **URL-alvo** (`targetUrl`):
 Onde a Solução vive hoje (ex.: `https://epistemix.dev`, `https://traveltogether.thiagopanini.dev`). É um campo de config. Quando a Solução migrar de domínio (no repo dela), **só esse campo muda aqui**.
@@ -36,7 +36,7 @@ Ciclo de vida curado da Solução: `idea → alpha → beta → live → sunset`
 
 ## Modelo de dados (esboço)
 
-- **Entrada `Solution`** (curada, em código): `slug, nome, tagline, descrição, targetUrl, repo (owner/name), status, techChips[], tags[]`.
+- **Entrada `Solution`** (curada, em código): `slug, nome, tagline, descrição, targetUrl, repo (owner/name), status, techChips[], tags[]` (+ `previewUrl?` opcional, se o design quiser um visual da solução).
 - **Postgres**: `click_event(slug, ts)` (ou rollup `click_daily`).
 - **GitHub** (cacheado): `stars, commit_activity (→ sparkline), pushed_at`.
 
@@ -47,8 +47,9 @@ Ciclo de vida curado da Solução: `idea → alpha → beta → live → sunset`
 3. Editorial é **curado** (código); vitalidade é **puxada** (GitHub, cacheada); acessos são **medidos** (Postgres). Três fontes, separadas por dono.
 4. O panlabs é **read-only** sobre as Soluções; a única escrita é o evento de clique.
 5. Indicadores são de **vitalidade e popularidade honesta** (commits, stars, cliques) — nunca operacionais. Saúde/uptime/latência foram **rejeitados** ([ADR-0005](adr/0005-indicadores.md)).
-6. **Uma sparkline por card** (a de commits). Cliques aparecem como número até haver volume que justifique tendência.
+6. Indicadores **não fingem tendência** que não existe: cliques entram como número até haver volume; sparkline só onde o dado sustenta. *Se e como* exibi-los é **forma — decisão do design**.
 7. Nada de design/contexto das outras soluções influencia o panlabs. Só o scaffolding de deploy é compartilhado.
+8. O **produto é o herói** do card; indicadores são **prova-de-vida secundária**. Os docs travam **intenção e prioridade**; a **forma** (placement, contagem, tratamento visual) é decisão do design ([ADR-0011](adr/0011-produto-primeiro-indicadores-secundarios.md)).
 
 ## Em breve (V2+) — nomeado, não construído
 

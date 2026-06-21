@@ -16,7 +16,7 @@ O V1 do panlabs é uma **vitrine + redirecionador rastreado**, um **agregador re
 
 - panlabs fica fino, barato e desacoplado das Soluções.
 - Funcionalidades de plataforma (engajamento, identidade) ficam registradas pro V2 (ver [CONTEXT.md → Em breve](../CONTEXT.md)).
-- O "Premium" vem de **design + indicadores honestos**, não de features sociais.
+- O "Premium" vem do **design e da curadoria dos produtos**; indicadores honestos são **reforço secundário**, não o atrativo principal nem features sociais (ver [ADR-0011](0011-produto-primeiro-indicadores-secundarios.md)).
 
 ## Alternativas rejeitadas
 

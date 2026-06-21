@@ -4,11 +4,11 @@
 
 ## O que é
 
-panlabs é uma vitrine **pt-BR**, hospedada no apex `panlabs.tech`, que expõe as soluções SaaS do autor como um catálogo navegável e redireciona o visitante para onde cada solução vive. **Não é a casa das soluções** — é um **agregador read-only** com a única métrica que só ele pode medir: o clique de saída.
+panlabs é uma vitrine **pt-BR** no apex `panlabs.tech`: um **catálogo navegável das soluções SaaS do autor** que mostra o que cada uma é e leva o visitante até ela. **O assunto são as soluções.** panlabs não é a casa delas — é um **agregador read-only** que observa e linka; a única coisa que ele mesmo mede é o clique de saída.
 
 ## Posicionamento
 
-**Laboratório vivo.** panlabs assume o próprio nome: é o lugar onde experimentos com software assistido por IA viram SaaS reais, que ficam de pé. A personalidade é curiosa, inventiva, com **profundidade técnica como substância** e um toque lúdico — premium **sem fingir escala** que não existe.
+**Catálogo de produtos reais, com alma de laboratório.** O assunto são as soluções que o autor criou; *laboratório vivo* é o **tom**, não o tema — experimentos com software assistido por IA que viraram SaaS de pé. Personalidade curiosa e inventiva, **profundidade técnica como substância** e um toque lúdico; premium **sem fingir escala** que não existe.
 
 ## Para quem
 
@@ -21,7 +21,7 @@ O repo de cada solução é a **fonte da verdade** sobre ela (seu domínio, sua 
 ## Escopo V1
 
 - Uma **landing**: hero + grid de cards.
-- **Card** por solução: `status · tech-chips (curados) · ⭐ stars · sparkline de commits · nº de acessos` + ação "visitar".
+- **Card** por solução: prioriza, nesta ordem, **(1) o produto** — o que é e um jeito de entrar (o herói do card); **(2)** a ação "visitar"; **(3) vitalidade** como prova-de-vida discreta. *Quais* sinais e *como/onde* exibi-los é **forma — decisão do design** (set candidato em [CONTEXT.md](CONTEXT.md) e [ADR-0005](adr/0005-indicadores.md); prioridade em [ADR-0011](adr/0011-produto-primeiro-indicadores-secundarios.md)).
 - **Redirect rastreado** `/go/[slug]` → 302 para a URL-alvo da solução (a única escrita do app).
 
 ## Fora de escopo no V1

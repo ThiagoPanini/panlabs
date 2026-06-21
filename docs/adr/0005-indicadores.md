@@ -1,6 +1,6 @@
 # ADR-0005: Indicadores — vitalidade e popularidade honesta
 
-- **Status:** aceito (2026-06-21)
+- **Status:** aceito (2026-06-21) · **ênfase recontextualizada por [ADR-0011](0011-produto-primeiro-indicadores-secundarios.md)** — este ADR define o *set candidato* de indicadores; eles são **secundários ao produto** e sua prioridade/forma na face do card é decisão do design.
 
 ## Contexto
 
