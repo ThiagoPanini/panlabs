@@ -38,7 +38,7 @@ describe("Catalog", () => {
   it("links real solutions directly and safely", async () => {
     render(await Catalog());
     const cta = screen.getByRole("link", { name: /touch traveltogether/ });
-    expect(cta).toHaveAttribute("href", "https://traveltogether.thiagopanini.dev");
+    expect(cta).toHaveAttribute("href", "/go/traveltogether");
     expect(cta.getAttribute("rel")).toContain("noopener");
   });
 

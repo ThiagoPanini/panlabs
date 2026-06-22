@@ -5,7 +5,7 @@ import { sparkline } from "@/lib/sparkline";
 import styles from "./SolutionCard.module.css";
 
 export function SolutionCard({ solution }: { solution: Solution }) {
-  const { slug, name, tagline, desc, url, status, tech, stats, weeks, shot, shotBg } = solution;
+  const { slug, name, tagline, desc, status, tech, stats, weeks, shot, shotBg } = solution;
   const { line, area } = sparkline(weeks);
   const gradientId = `plspark-${slug}`;
 
@@ -86,7 +86,7 @@ export function SolutionCard({ solution }: { solution: Solution }) {
           </div>
         </div>
 
-        <a className={styles.cta} href={url} target="_blank" rel="noopener noreferrer">
+        <a className={styles.cta} href={`/go/${slug}`} target="_blank" rel="noopener noreferrer">
           $ touch {slug} →
         </a>
       </div>

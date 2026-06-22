@@ -30,10 +30,11 @@ describe("SolutionCard", () => {
     expect(screen.getByText("14")).toBeInTheDocument();
   });
 
-  it("links to the live product safely in a new tab", () => {
+  it("routes its CTA through the tracked redirect, opening safely in a new tab", () => {
     render(<SolutionCard solution={epistemix} />);
     const cta = screen.getByRole("link", { name: /touch epistemix/ });
-    expect(cta).toHaveAttribute("href", "https://epistemix.dev");
+    // the CTA points at /go/[slug] (the app's only write path), not the raw url
+    expect(cta).toHaveAttribute("href", "/go/epistemix");
     expect(cta).toHaveAttribute("target", "_blank");
     expect(cta.getAttribute("rel")).toContain("noopener");
   });
