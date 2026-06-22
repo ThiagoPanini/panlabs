@@ -1,9 +1,49 @@
 .hero {
   position: relative;
+  isolation: isolate;
+  overflow: hidden;
   border-bottom: var(--border-w-hairline) solid var(--border-subtle);
+
+  /* ---- hero cover knobs · TUNE HERE -------------------------------------
+     --hero-cover-blur:       desfoque leve da imagem (↑ = mais borrado)
+     --hero-cover-brightness: escurecimento da imagem (↓ = mais escura)
+     --hero-cover-scrim:      opacidade do véu escuro por cima (↑ = mais escuro) */
+  --hero-cover-blur: 3px;
+  --hero-cover-brightness: 0.3;
+  --hero-cover-scrim: 0.72;
+}
+
+/* full-bleed cover layer behind the terminal copy */
+.cover {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.coverImg {
+  object-fit: cover;
+  object-position: center;
+  /* slight upscale hides the soft edges that blur() leaves at the borders */
+  transform: scale(1.06);
+  filter: blur(var(--hero-cover-blur)) brightness(var(--hero-cover-brightness));
+}
+
+/* darken + fade into the page so the copy always reads on near-solid ink */
+.coverScrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(7, 8, 10, calc(var(--hero-cover-scrim) * 0.82)) 0%,
+    rgba(7, 8, 10, calc(var(--hero-cover-scrim) * 0.6)) 40%,
+    rgba(7, 8, 10, var(--hero-cover-scrim)) 100%
+  );
 }
 
 .inner {
+  position: relative;
+  z-index: 1;
   max-width: var(--size-container-max);
   margin: 0 auto;
   padding: var(--space-15) var(--space-10);
@@ -54,6 +94,18 @@
   font-weight: var(--fw-bold);
   letter-spacing: var(--ls-hero-title);
   color: var(--text-max);
+
+  /* ---- typewriter knobs · TUNE HERE -------------------------------------
+     Runs on every load/refresh; the caret follows the typed edge, then
+     blinks like a text editor caret once typing stops.
+     --type-steps:       um passo por glifo de "ls ./panlabs" (12)
+     --type-duration:    tempo total de digitação
+     --type-delay:       espera antes de começar a digitar
+     --caret-blink-at:   instante em que o caret para de digitar e pisca */
+  --type-steps: 12;
+  --type-duration: 1.4s;
+  --type-delay: 280ms;
+  --caret-blink-at: 1750ms;
 }
 
 /* typewriter clip: reveals `ls ./panlabs` left-to-right, then holds while the
@@ -64,7 +116,7 @@
   max-width: 13ch;
   overflow: hidden;
   white-space: nowrap;
-  animation: pl-type 1.4s steps(12, end) 280ms both;
+  animation: pl-type var(--type-duration) steps(var(--type-steps), end) var(--type-delay) both;
 }
 
 .gradient {
@@ -82,7 +134,7 @@
   margin-left: var(--space-1-5);
   background: var(--accent-violet);
   /* solid while "typing", then blinks as if waiting for more input */
-  animation: pl-blink var(--duration-blink) step-end 1750ms infinite;
+  animation: pl-blink var(--duration-blink) step-end var(--caret-blink-at) infinite;
 }
 
 .lede {
@@ -121,5 +173,30 @@
     width: 10px;
     height: 28px;
     vertical-align: -4px;
+  }
+}
+
+/* Keyframes are co-located here (not in global theme.css): CSS Modules scope
+   `animation-name`, so a global keyframe would never match the scoped ref. */
+
+/* hero: typewriter reveal of `ls ./panlabs` (clips an inline-block by width;
+   max-width clamps to the real text so the caret lands flush after it) */
+@keyframes pl-type {
+  from {
+    max-width: 0;
+  }
+  to {
+    max-width: var(--type-target, 100%);
+  }
+}
+
+@keyframes pl-blink {
+  0%,
+  48% {
+    opacity: 1;
+  }
+  52%,
+  100% {
+    opacity: 0;
   }
 }

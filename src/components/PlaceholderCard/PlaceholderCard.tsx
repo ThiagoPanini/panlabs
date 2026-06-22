@@ -2,20 +2,16 @@ import styles from "./PlaceholderCard.module.css";
 
 /**
  * "Next experiment" slot — reframed as the *draft* of a future solution card:
- * an "em breve" badge, a breathing brand `+`, and shimmering skeleton lines
- * standing in for the tagline, copy and tech it will eventually carry. Inert
- * (no link, stats, CTA), but it reads as a card-in-the-making rather than a
- * dead `// TODO`.
+ * an "em breve" badge (pinned where the real cards carry their status pill) and
+ * shimmering skeleton lines standing in for the tagline, copy and tech it will
+ * eventually carry. Inert (no link, stats, CTA, no clickable `+`), but it reads
+ * as a card-in-the-making rather than a dead `// TODO`.
  */
 export function PlaceholderCard() {
   return (
     <article className={styles.card} aria-label="Próximo experimento a caminho">
       <div className={styles.preview}>
         <span className={styles.badge}>em breve</span>
-        <div className={styles.mark} aria-hidden="true">
-          <span className={styles.ring} />
-          <span className={styles.plus}>+</span>
-        </div>
       </div>
 
       <div className={styles.body}>
