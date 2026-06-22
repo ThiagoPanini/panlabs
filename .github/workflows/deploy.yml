@@ -34,7 +34,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: guard
-        run: echo "enabled=${{ secrets.COOLIFY_TOKEN != '' }}" >> "$GITHUB_OUTPUT"
+        env:
+          COOLIFY_URL: ${{ secrets.COOLIFY_URL }}
+          COOLIFY_TOKEN: ${{ secrets.COOLIFY_TOKEN }}
+        run: |
+          if [ -n "$COOLIFY_TOKEN" ] && [ -n "$COOLIFY_URL" ]; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Trigger Coolify deploy
         if: steps.guard.outputs.enabled == 'true'
@@ -63,8 +71,8 @@ jobs:
           done
           echo "::error::Smoke test falhou — panlabs.tech nao respondeu 200 a tempo."; exit 1
 
-      - name: Deploy pulado (sem secrets do Coolify)
+      - name: Deploy pulado (faltam secrets do Coolify)
         if: steps.guard.outputs.enabled != 'true'
         run: |
-          echo "::notice::COOLIFY_TOKEN ausente — deploy pulado (a build/CD e do Coolify)."
-          echo "::notice::Para ativar: adicione os secrets COOLIFY_URL e COOLIFY_TOKEN (token de API do Coolify)."
+          echo "::notice::Deploy pulado — exige os secrets COOLIFY_URL e COOLIFY_TOKEN."
+          echo "::notice::COOLIFY_TOKEN: ${{ secrets.COOLIFY_TOKEN != '' && 'definido' || 'AUSENTE' }} | COOLIFY_URL: ${{ secrets.COOLIFY_URL != '' && 'definido' || 'AUSENTE' }}"
