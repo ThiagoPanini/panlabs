@@ -79,3 +79,21 @@
   line-height: var(--lh-hero-lede);
   color: var(--text-hero);
 }
+
+/* handoff: shrink the hero on small screens, no horizontal overflow */
+@media (max-width: 639px) {
+  .inner {
+    padding: var(--space-10) var(--space-5);
+  }
+
+  .title {
+    font-size: 32px;
+    letter-spacing: -1px;
+  }
+
+  .cursor {
+    width: 10px;
+    height: 28px;
+    vertical-align: -4px;
+  }
+}

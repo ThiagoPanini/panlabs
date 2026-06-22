@@ -241,3 +241,13 @@
   border-color: transparent;
   color: var(--text-max);
 }
+
+/* handoff: comfortable touch target on mobile (≥44px) */
+@media (max-width: 639px) {
+  .cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+  }
+}
