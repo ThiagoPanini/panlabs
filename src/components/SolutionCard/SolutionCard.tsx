@@ -20,11 +20,13 @@ export function SolutionCard({ solution }: { solution: Solution }) {
           className={styles.shot}
         />
         <span className={styles.overlay} aria-hidden="true" />
-        <span className={`${styles.status} ${styles[status]}`}>
-          <span className={styles.statusDot} aria-hidden="true" />
-          {status}
-        </span>
-        <h3 className={styles.name}>{name}</h3>
+        <div className={styles.titleRow}>
+          <h3 className={styles.name}>{name}</h3>
+          <span className={`${styles.status} ${styles[status]}`}>
+            <span className={styles.statusDot} aria-hidden="true" />
+            {status}
+          </span>
+        </div>
       </div>
 
       <div className={styles.body}>
@@ -87,7 +89,10 @@ export function SolutionCard({ solution }: { solution: Solution }) {
         </div>
 
         <a className={styles.cta} href={`/go/${slug}`} target="_blank" rel="noopener noreferrer">
-          $ touch {slug} →
+          <span className={styles.ctaText}>$ touch {slug}</span>
+          <span className={styles.ctaArrow} aria-hidden="true">
+            →
+          </span>
         </a>
       </div>
     </article>

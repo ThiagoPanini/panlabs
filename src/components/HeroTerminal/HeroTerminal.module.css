@@ -45,6 +45,8 @@
 }
 
 .title {
+  display: flex;
+  align-items: flex-end;
   margin: 0 0 var(--space-4-5);
   font-family: var(--font-mono);
   font-size: var(--fs-hero-title);
@@ -52,6 +54,17 @@
   font-weight: var(--fw-bold);
   letter-spacing: var(--ls-hero-title);
   color: var(--text-max);
+}
+
+/* typewriter clip: reveals `ls ./panlabs` left-to-right, then holds while the
+   caret blinks (target slightly over the glyph run so it lands flush). */
+.type {
+  --type-target: 13ch;
+  display: inline-block;
+  max-width: 13ch;
+  overflow: hidden;
+  white-space: nowrap;
+  animation: pl-type 1.4s steps(12, end) 280ms both;
 }
 
 .gradient {
@@ -63,12 +76,13 @@
 
 .cursor {
   display: inline-block;
+  flex-shrink: 0;
   width: var(--size-cursor-w);
   height: var(--size-cursor-h);
   margin-left: var(--space-1-5);
-  vertical-align: -6px;
   background: var(--accent-violet);
-  animation: pl-blink var(--duration-blink) step-end infinite;
+  /* solid while "typing", then blinks as if waiting for more input */
+  animation: pl-blink var(--duration-blink) step-end 1750ms infinite;
 }
 
 .lede {
@@ -80,8 +94,13 @@
   color: var(--text-hero);
 }
 
-/* a11y: freeze the blinking cursor (kept visible) */
+/* a11y: skip the typewriter reveal and freeze the caret (kept visible) */
 @media (prefers-reduced-motion: reduce) {
+  .type {
+    max-width: 13ch;
+    animation: none;
+  }
+
   .cursor {
     animation: none;
   }

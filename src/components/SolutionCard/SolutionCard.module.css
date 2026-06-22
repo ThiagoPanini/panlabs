@@ -44,11 +44,21 @@
   pointer-events: none;
 }
 
-.status {
+/* title + status share one row, pinned to the (now darkened) preview floor */
+.titleRow {
   position: absolute;
-  top: var(--space-3);
-  left: var(--space-3);
+  right: var(--space-4);
+  bottom: var(--space-3);
+  left: var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.status {
   display: inline-flex;
+  flex-shrink: 0;
   align-items: center;
   gap: var(--space-1-5);
   padding: var(--space-1) var(--space-2);
@@ -77,14 +87,14 @@
 }
 
 .name {
-  position: absolute;
-  left: var(--space-4);
-  bottom: var(--space-3);
   margin: 0;
+  overflow: hidden;
   font-family: var(--font-mono);
   font-size: var(--fs-card-name);
   font-weight: var(--fw-bold);
   letter-spacing: var(--ls-card-name);
+  white-space: nowrap;
+  text-overflow: ellipsis;
   color: var(--text-max);
 }
 
@@ -188,7 +198,12 @@
   color: var(--accent-star);
 }
 
+/* column layout so the "commit activity" label top-aligns with the other
+   stat labels (was a lone inline label sitting low in a tall line box) */
 .activity {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
   text-align: right;
 }
 
@@ -221,6 +236,11 @@
 
 /* ---- cta ----------------------------------------------------------------- */
 .cta {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1-5);
   padding: var(--space-2) var(--space-3-5);
   background: var(--bg-cta-rest);
   border: var(--border-w-hairline) solid var(--border-cta);
@@ -232,15 +252,51 @@
   text-align: center;
   text-decoration: none;
   transition:
-    background var(--duration-cta) var(--easing-standard),
     border-color var(--duration-cta) var(--easing-standard),
-    color var(--duration-cta) var(--easing-standard);
+    color var(--duration-cta) var(--easing-standard),
+    box-shadow var(--duration-cta) var(--easing-standard);
 }
 
-.cta:hover {
-  background: var(--gradient-brand);
+/* brand outline drawn ONLY on the border ring (mask-composite), never the fill */
+.cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1.4px;
+  border-radius: inherit;
+  background: linear-gradient(115deg, #c44fd0, #8b5cf6, #3d9be0, #8b5cf6, #c44fd0);
+  background-size: 200% 100%;
+  background-position: 0 50%;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity var(--duration-cta) var(--easing-standard);
+  pointer-events: none;
+}
+
+.cta:hover,
+.cta:focus-visible {
   border-color: transparent;
   color: var(--text-max);
+  box-shadow: 0 8px 26px -16px var(--color-hover-glow);
+}
+
+.cta:hover::before,
+.cta:focus-visible::before {
+  opacity: 1;
+  animation: pl-cta-flow 2.6s linear infinite;
+}
+
+.ctaArrow {
+  transition: transform var(--duration-cta) var(--easing-card);
+}
+
+.cta:hover .ctaArrow,
+.cta:focus-visible .ctaArrow {
+  transform: translateX(3px);
 }
 
 /* handoff: comfortable touch target on mobile (≥44px) */
@@ -269,5 +325,15 @@
   .sparkLine {
     stroke-dashoffset: 0;
     transition: none;
+  }
+
+  .cta:hover::before,
+  .cta:focus-visible::before {
+    animation: none;
+  }
+
+  .cta:hover .ctaArrow,
+  .cta:focus-visible .ctaArrow {
+    transform: none;
   }
 }

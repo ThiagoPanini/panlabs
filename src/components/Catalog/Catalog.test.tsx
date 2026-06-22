@@ -32,7 +32,9 @@ describe("Catalog", () => {
     expect(screen.getAllByRole("article")).toHaveLength(3);
     expect(screen.getByRole("heading", { name: "epistemix" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "traveltogether" })).toBeInTheDocument();
-    expect(screen.getByText("// TODO")).toBeInTheDocument();
+    expect(
+      screen.getByRole("article", { name: "Próximo experimento a caminho" }),
+    ).toBeInTheDocument();
   });
 
   it("links real solutions directly and safely", async () => {

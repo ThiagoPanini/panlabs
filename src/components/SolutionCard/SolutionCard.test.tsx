@@ -20,8 +20,8 @@ describe("SolutionCard", () => {
   it("lists the tech stack labels", () => {
     render(<SolutionCard solution={epistemix} />);
     expect(screen.getByText("Next.js")).toBeInTheDocument();
-    expect(screen.getByText("PostgreSQL")).toBeInTheDocument();
-    expect(screen.getByText("TypeScript")).toBeInTheDocument();
+    expect(screen.getByText("Postgres")).toBeInTheDocument();
+    expect(screen.getByText("TS")).toBeInTheDocument();
   });
 
   it("shows repository stats", () => {

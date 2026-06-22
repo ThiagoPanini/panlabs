@@ -13,7 +13,9 @@ export function HeroTerminal() {
           <span className={styles.command}>ls ./panlabs</span>
         </div>
         <h1 className={styles.title}>
-          ls <span className={styles.gradient}>./panlabs</span>
+          <span className={styles.type}>
+            ls <span className={styles.gradient}>./panlabs</span>
+          </span>
           <span className={styles.cursor} aria-hidden="true" />
         </h1>
         <p className={styles.lede}>
