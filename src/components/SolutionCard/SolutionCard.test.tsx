@@ -48,4 +48,13 @@ describe("SolutionCard", () => {
     // the sparkline and icons are decorative; the numbers already convey the data
     expect(screen.queryByRole("img")).not.toBeInTheDocument();
   });
+
+  it("renders tech and github icons locally, with no external icon request (#15)", () => {
+    const { container } = render(<SolutionCard solution={epistemix} />);
+    // no <img> pointing at the Simple Icons CDN
+    expect(container.querySelector('img[src*="simpleicons"]')).toBeNull();
+    // tech chips render inline svg paths instead
+    const chipIcons = container.querySelectorAll(`.${"chip"} svg, [class*='chip'] svg`);
+    expect(chipIcons.length).toBeGreaterThanOrEqual(epistemix.tech.length);
+  });
 });
