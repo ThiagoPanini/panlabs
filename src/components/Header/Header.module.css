@@ -10,7 +10,8 @@
 
 .logo {
   display: block;
-  border-radius: var(--radius-full);
+  /* keep the brand gradient in high-contrast mode (logo exception) */
+  forced-color-adjust: none;
 }
 
 .wordmark {

@@ -16,7 +16,7 @@ describe("Header", () => {
 
   it("shows the logo with an accessible name", () => {
     render(<Header />);
-    expect(screen.getByAltText("panlabs")).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "panlabs" })).toBeInTheDocument();
   });
 
   it("shows the build * automate * innovate tagline", () => {

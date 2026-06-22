@@ -1,17 +1,10 @@
-import Image from "next/image";
 import styles from "./Header.module.css";
+import { Logo } from "./Logo";
 
 export function Header() {
   return (
     <header className={styles.header}>
-      <Image
-        src="/assets/logo.png"
-        alt="panlabs"
-        width={30}
-        height={30}
-        className={styles.logo}
-        priority
-      />
+      <Logo size={30} className={styles.logo} />
       <span className={styles.wordmark}>panlabs</span>
       <span className={styles.meta}>/ catálogo</span>
       <span className={styles.spacer} />
