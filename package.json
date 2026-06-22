@@ -12,7 +12,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "prepare": "lefthook install"
+    "prepare": "lefthook install || true"
   },
   "dependencies": {
     "next": "^16.2.9",
