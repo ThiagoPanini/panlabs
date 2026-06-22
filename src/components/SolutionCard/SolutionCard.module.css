@@ -1,0 +1,197 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--bg-surface);
+  border: var(--border-w-hairline) solid var(--border-default);
+  border-radius: var(--radius-card);
+  transition:
+    transform var(--duration-card) var(--easing-card),
+    border-color var(--duration-card) var(--easing-card),
+    box-shadow var(--duration-card) var(--easing-card);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-hover-border);
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* ---- preview ------------------------------------------------------------- */
+.preview {
+  position: relative;
+  height: var(--size-preview-height);
+  overflow: hidden;
+}
+
+.shot {
+  object-fit: cover;
+  transition: transform var(--duration-shot) var(--easing-card);
+}
+
+.card:hover .shot {
+  transform: scale(1.05);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-preview-overlay);
+  pointer-events: none;
+}
+
+.status {
+  position: absolute;
+  top: var(--space-2-5);
+  right: var(--space-2-5);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1-5);
+  padding: var(--space-1) var(--space-2);
+  background: var(--bg-badge);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: var(--fs-badge);
+  letter-spacing: var(--ls-badge);
+  text-transform: uppercase;
+  color: var(--text-on-badge);
+}
+
+.statusDot {
+  width: var(--size-status-dot);
+  height: var(--size-status-dot);
+  border-radius: var(--radius-full);
+}
+
+.live .statusDot {
+  background: var(--color-status-live);
+}
+
+.beta .statusDot {
+  background: var(--color-status-beta);
+}
+
+/* ---- body ---------------------------------------------------------------- */
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4-5);
+}
+
+.name {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--fs-card-name);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-card-name);
+  color: var(--text-strong);
+}
+
+.tagline {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--fs-card-tagline);
+  color: var(--text-body);
+}
+
+/* ---- tech chips ---------------------------------------------------------- */
+.tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1-5);
+  padding: var(--space-1) var(--space-2);
+  background: var(--bg-chip);
+  border: var(--border-w-hairline) solid var(--border-chip);
+  border-radius: var(--radius-chip);
+  font-family: var(--font-mono);
+  font-size: var(--fs-chip);
+  color: var(--text-chip);
+}
+
+.chipIcon {
+  opacity: var(--opacity-tech-icon);
+}
+
+/* ---- stats + sparkline --------------------------------------------------- */
+.stats {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.statValue {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-family: var(--font-mono);
+  font-size: var(--fs-stat-value);
+  font-weight: var(--fw-semibold);
+  color: var(--text-default);
+}
+
+.star {
+  color: var(--accent-star);
+}
+
+.statLabel {
+  font-family: var(--font-mono);
+  font-size: var(--fs-stat-label);
+  letter-spacing: var(--ls-stat-label);
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.spark {
+  margin-left: auto;
+  width: var(--size-spark-w);
+  height: var(--size-spark-h);
+}
+
+.sparkArea {
+  opacity: var(--opacity-spark-fill);
+}
+
+.sparkLine {
+  fill: none;
+  stroke: var(--accent-violet);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ---- cta ----------------------------------------------------------------- */
+.cta {
+  align-self: flex-start;
+  padding: var(--space-2) var(--space-3-5);
+  background: var(--bg-cta-rest);
+  border: var(--border-w-hairline) solid var(--border-cta);
+  border-radius: var(--radius-control);
+  font-family: var(--font-mono);
+  font-size: var(--fs-cta);
+  color: var(--text-strong);
+  text-decoration: none;
+  transition:
+    background var(--duration-cta) var(--easing-standard),
+    border-color var(--duration-cta) var(--easing-standard);
+}
+
+.cta:hover {
+  background: var(--color-w-08);
+  border-color: var(--color-hover-border);
+}
