@@ -14,6 +14,8 @@ export interface Solution {
   /** longer plain description */
   desc: string;
   url: string;
+  /** GitHub `owner/name`; when set, vitality is pulled live (#12). */
+  repo?: string;
   status: SolutionStatus;
   tech: TechBadge[];
   stats: { stars: number; commits: number; prs: number };
@@ -31,6 +33,7 @@ export const epistemix: Solution = {
   tagline: "Hub pessoal de aprendizado",
   desc: "Blog, cursos, livros, certificações e apresentações técnicas — um só lugar para registrar e compartilhar o que estudo.",
   url: "https://epistemix.dev",
+  repo: "ThiagoPanini/epistemix",
   status: "live",
   tech: [
     { label: "Next.js", slug: "nextdotjs" },
