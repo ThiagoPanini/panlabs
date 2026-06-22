@@ -1,3 +1,10 @@
+skip_output:
+  - meta
+  - summary
+  - success
+  - execution_info
+  - skips
+
 pre-commit:
   commands:
     biome:

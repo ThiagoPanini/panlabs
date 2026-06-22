@@ -14,6 +14,9 @@ RUN npm ci --ignore-scripts
 FROM base AS builder
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+# Ensure public/ exists so the runner COPY never fails when the repo ships no
+# static assets yet (Next standalone treats public/ as optional).
+RUN mkdir -p public
 ENV NEXT_TELEMETRY_DISABLED=1
 RUN npm run build
 
