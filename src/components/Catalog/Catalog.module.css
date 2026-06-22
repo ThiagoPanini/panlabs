@@ -17,3 +17,21 @@
   gap: var(--space-4-5);
   align-items: stretch;
 }
+
+/* handoff breakpoints (absent from Chosen): 3 → 2 → 1 columns */
+@media (max-width: 1023px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 639px) {
+  .catalog {
+    padding-right: var(--space-5);
+    padding-left: var(--space-5);
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

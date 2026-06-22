@@ -46,3 +46,10 @@
 .astViolet {
   color: var(--color-brand-violet-light);
 }
+
+/* handoff: the tagline is noise on small screens */
+@media (max-width: 767px) {
+  .tagline {
+    display: none;
+  }
+}
