@@ -9,7 +9,10 @@ export interface TechBadge {
 export interface Solution {
   slug: string;
   name: string;
+  /** short, lilac one-liner */
   tagline: string;
+  /** longer plain description */
+  desc: string;
   url: string;
   status: SolutionStatus;
   tech: TechBadge[];
@@ -26,6 +29,7 @@ export const epistemix: Solution = {
   slug: "epistemix",
   name: "epistemix",
   tagline: "Hub pessoal de aprendizado",
+  desc: "Blog, cursos, livros, certificações e apresentações técnicas — um só lugar para registrar e compartilhar o que estudo.",
   url: "https://epistemix.dev",
   status: "live",
   tech: [
@@ -39,4 +43,22 @@ export const epistemix: Solution = {
   shotBg: "#101826",
 };
 
-export const solutions: Solution[] = [epistemix];
+export const traveltogether: Solution = {
+  slug: "traveltogether",
+  name: "traveltogether",
+  tagline: "Planejar viagens em grupo, juntos",
+  desc: "Caderno de bordo compartilhado: o grupo cadastra a viagem, desenha as paradas cidade a cidade e decide o translado a várias mãos.",
+  url: "https://traveltogether.thiagopanini.dev",
+  status: "beta",
+  tech: [
+    { label: "Next.js", slug: "nextdotjs" },
+    { label: "FastAPI", slug: "fastapi" },
+    { label: "PostgreSQL", slug: "postgresql" },
+  ],
+  stats: { stars: 6, commits: 132, prs: 9 },
+  weeks: [0, 1, 0, 2, 1, 3, 2, 4, 3, 2, 5, 4, 6, 5, 7, 6, 5, 8, 7, 9, 8, 10, 9, 11, 10, 12],
+  shot: "/assets/shot-traveltogether.png",
+  shotBg: "#1a1420",
+};
+
+export const solutions: Solution[] = [epistemix, traveltogether];
