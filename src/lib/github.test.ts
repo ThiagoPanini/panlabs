@@ -56,7 +56,7 @@ describe("fetchVitality", () => {
       "/repos/o/r": { status: 404, body: { message: "Not Found" } },
       "/stats/commit_activity": { status: 202, body: {} },
     });
-    const v = await fetchVitality("o/r", { fetchImpl });
+    const v = await fetchVitality("o/r", { fetchImpl, sleep: async () => {} });
     expect(v).toEqual({ stars: null, weeks: null });
   });
 
@@ -68,6 +68,55 @@ describe("fetchVitality", () => {
       stars: null,
       weeks: null,
     });
+  });
+
+  it("retries commit_activity while GitHub answers 202 (stats still computing)", async () => {
+    let statsCalls = 0;
+    const fetchImpl = vi.fn(async (url: string | URL | Request) => {
+      const href = String(url);
+      if (href.endsWith("/stats/commit_activity")) {
+        statsCalls += 1;
+        return statsCalls < 3
+          ? new Response("{}", { status: 202 })
+          : new Response(JSON.stringify(weeks52), { status: 200 });
+      }
+      return new Response(JSON.stringify({ stargazers_count: 0 }), { status: 200 });
+    }) as unknown as typeof fetch;
+
+    const sleep = vi.fn(async () => {});
+    const v = await fetchVitality("o/r", { fetchImpl, retries: 3, sleep });
+    expect(statsCalls).toBe(3);
+    expect(v.weeks).toHaveLength(26);
+    expect(sleep).toHaveBeenCalledTimes(2);
+  });
+
+  it("gives up after the retry budget and degrades the heartbeat to null", async () => {
+    let statsCalls = 0;
+    const fetchImpl = vi.fn(async (url: string | URL | Request) => {
+      if (String(url).endsWith("/stats/commit_activity")) {
+        statsCalls += 1;
+        return new Response("{}", { status: 202 });
+      }
+      return new Response(JSON.stringify({ stargazers_count: 3 }), { status: 200 });
+    }) as unknown as typeof fetch;
+
+    const v = await fetchVitality("o/r", { fetchImpl, retries: 2, sleep: async () => {} });
+    expect(statsCalls).toBe(3); // initial + 2 retries
+    expect(v).toEqual({ stars: 3, weeks: null });
+  });
+
+  it("passes the revalidate window to fetch so navigation is served from cache", async () => {
+    const inits: RequestInit[] = [];
+    const fetchImpl = vi.fn(async (_url: string, init?: RequestInit) => {
+      inits.push(init ?? {});
+      return new Response(JSON.stringify({ stargazers_count: 0 }), { status: 200 });
+    }) as unknown as typeof fetch;
+
+    await fetchVitality("o/r", { fetchImpl, revalidate: 3600 });
+    expect(inits.length).toBeGreaterThan(0);
+    expect(
+      inits.every((i) => (i as { next?: { revalidate?: number } }).next?.revalidate === 3600),
+    ).toBe(true);
   });
 });
 
