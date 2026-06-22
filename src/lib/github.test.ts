@@ -25,6 +25,44 @@ describe("fetchVitality", () => {
     expect(v.stars).toBe(9);
   });
 
+  it("derives total commits (default branch, all-time) from the commits Link header", async () => {
+    const fetchImpl = vi.fn(async (url: string | URL | Request) => {
+      if (String(url).includes("/commits?per_page=1")) {
+        return new Response("[{}]", {
+          status: 200,
+          headers: {
+            link: '<https://api.github.com/repositories/1/commits?per_page=1&page=2>; rel="next", <https://api.github.com/repositories/1/commits?per_page=1&page=139>; rel="last"',
+          },
+        });
+      }
+      return new Response(JSON.stringify({ stargazers_count: 0 }), { status: 200 });
+    }) as unknown as typeof fetch;
+    const v = await fetchVitality("o/r", { fetchImpl, sleep: async () => {} });
+    expect(v.commits).toBe(139);
+  });
+
+  it("counts the returned commits when there is no Link header (≤1 commit)", async () => {
+    const fetchImpl = vi.fn(async (url: string | URL | Request) => {
+      if (String(url).includes("/commits?per_page=1")) {
+        return new Response(JSON.stringify([{ sha: "abc" }]), { status: 200 });
+      }
+      return new Response(JSON.stringify({ stargazers_count: 0 }), { status: 200 });
+    }) as unknown as typeof fetch;
+    const v = await fetchVitality("o/r", { fetchImpl, sleep: async () => {} });
+    expect(v.commits).toBe(1);
+  });
+
+  it("returns merged PR count (all-time) from the search endpoint total_count", async () => {
+    const fetchImpl = vi.fn(async (url: string | URL | Request) => {
+      if (String(url).includes("/search/issues")) {
+        return new Response(JSON.stringify({ total_count: 81, items: [] }), { status: 200 });
+      }
+      return new Response(JSON.stringify({ stargazers_count: 0 }), { status: 200 });
+    }) as unknown as typeof fetch;
+    const v = await fetchVitality("o/r", { fetchImpl, sleep: async () => {} });
+    expect(v.prs).toBe(81);
+  });
+
   it("reduces the 52-week commit_activity to the last 26 weekly totals", async () => {
     const fetchImpl = fakeFetch({
       "/repos/ThiagoPanini/epistemix": { body: { stargazers_count: 9 } },
@@ -57,7 +95,7 @@ describe("fetchVitality", () => {
       "/stats/commit_activity": { status: 202, body: {} },
     });
     const v = await fetchVitality("o/r", { fetchImpl, sleep: async () => {} });
-    expect(v).toEqual({ stars: null, weeks: null });
+    expect(v).toEqual({ stars: null, commits: null, prs: null, weeks: null });
   });
 
   it("never throws when the network is down (safe at static build time)", async () => {
@@ -66,6 +104,8 @@ describe("fetchVitality", () => {
     }) as unknown as typeof fetch;
     await expect(fetchVitality("o/r", { fetchImpl })).resolves.toEqual({
       stars: null,
+      commits: null,
+      prs: null,
       weeks: null,
     });
   });
@@ -102,7 +142,7 @@ describe("fetchVitality", () => {
 
     const v = await fetchVitality("o/r", { fetchImpl, retries: 2, sleep: async () => {} });
     expect(statsCalls).toBe(3); // initial + 2 retries
-    expect(v).toEqual({ stars: 3, weeks: null });
+    expect(v).toEqual({ stars: 3, commits: null, prs: null, weeks: null });
   });
 
   it("passes the revalidate window to fetch so navigation is served from cache", async () => {
@@ -121,17 +161,19 @@ describe("fetchVitality", () => {
 });
 
 describe("withVitality", () => {
-  it("overlays live stars and weeks onto a solution", () => {
-    const live = withVitality(epistemix, { stars: 42, weeks: [1, 2, 3] });
+  it("overlays every live signal (stars, commits, prs, weeks) onto a solution", () => {
+    const live = withVitality(epistemix, { stars: 42, commits: 500, prs: 73, weeks: [1, 2, 3] });
     expect(live.stats.stars).toBe(42);
+    expect(live.stats.commits).toBe(500);
+    expect(live.stats.prs).toBe(73);
     expect(live.weeks).toEqual([1, 2, 3]);
-    // other stats stay curated
-    expect(live.stats.commits).toBe(epistemix.stats.commits);
   });
 
   it("keeps curated values for any signal that came back null", () => {
-    const live = withVitality(epistemix, { stars: null, weeks: null });
+    const live = withVitality(epistemix, { stars: null, commits: null, prs: null, weeks: null });
     expect(live.stats.stars).toBe(epistemix.stats.stars);
+    expect(live.stats.commits).toBe(epistemix.stats.commits);
+    expect(live.stats.prs).toBe(epistemix.stats.prs);
     expect(live.weeks).toEqual(epistemix.weeks);
   });
 });
