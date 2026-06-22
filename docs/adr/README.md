@@ -15,3 +15,4 @@ Decisões de arquitetura registradas. Uma por arquivo, numeradas. Status `aceito
 | [0009](0009-idioma-pt-br.md) | Idioma — pt-BR | aceito |
 | [0010](0010-independencia-entre-apps.md) | Independência entre apps | aceito |
 | [0011](0011-produto-primeiro-indicadores-secundarios.md) | Produto primeiro; indicadores secundários (correção de ênfase) | aceito |
+| [0012](0012-design-oficial-chosen-e-faseamento.md) | Design oficial "Chosen" e faseamento do V1 (V1.0 visual / V1.1 backend) | aceito |
