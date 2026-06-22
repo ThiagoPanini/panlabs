@@ -10,9 +10,10 @@ describe("SolutionCard", () => {
     expect(within(card).getByRole("heading", { name: "epistemix" })).toBeInTheDocument();
   });
 
-  it("shows the tagline and the status", () => {
+  it("shows the tagline, description, and status", () => {
     render(<SolutionCard solution={epistemix} />);
     expect(screen.getByText("Hub pessoal de aprendizado")).toBeInTheDocument();
+    expect(screen.getByText(/Blog, cursos, livros/)).toBeInTheDocument();
     expect(screen.getByText("live")).toBeInTheDocument();
   });
 

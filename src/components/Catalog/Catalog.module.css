@@ -1,0 +1,19 @@
+.catalog {
+  max-width: var(--size-container-max);
+  margin: 0 auto;
+  padding: var(--space-10-5) var(--space-10) var(--space-24);
+}
+
+.meta {
+  margin: 0 0 var(--space-4-5);
+  font-family: var(--font-mono);
+  font-size: var(--fs-section-meta);
+  color: var(--text-faint);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4-5);
+  align-items: stretch;
+}
