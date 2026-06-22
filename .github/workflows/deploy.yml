@@ -1,0 +1,70 @@
+name: deploy
+
+# Portão 3 — dispara o deploy no Coolify quando algo entra na main.
+#
+# O panlabs está conectado ao Coolify via GitHub App com build_pack=dockerfile:
+# o Coolify clona o repo e builda o Dockerfile da raiz. NÃO há build de imagem
+# aqui (não usamos GHCR) — este workflow só chama a API de deploy do Coolify
+# para ele puxar e buildar o commit novo da main.
+#
+# Guardado por COOLIFY_TOKEN: sem o secret, o passo é pulado (não falha), então
+# é seguro mergear antes de configurar os secrets.
+#   Secrets necessários: COOLIFY_URL, COOLIFY_TOKEN (token de API do Coolify).
+# O UUID do app não é segredo (aparece no hostname *.sslip.io público), então
+# fica fixo aqui.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-main
+  cancel-in-progress: false
+
+env:
+  WEB_UUID: scrzsdg3e5va08affeev0ogy
+
+jobs:
+  deploy:
+    name: deploy (coolify)
+    runs-on: ubuntu-latest
+    steps:
+      - id: guard
+        run: echo "enabled=${{ secrets.COOLIFY_TOKEN != '' }}" >> "$GITHUB_OUTPUT"
+
+      - name: Trigger Coolify deploy
+        if: steps.guard.outputs.enabled == 'true'
+        env:
+          COOLIFY_URL: ${{ secrets.COOLIFY_URL }}
+          COOLIFY_TOKEN: ${{ secrets.COOLIFY_TOKEN }}
+        run: |
+          set -euo pipefail
+          echo "Disparando deploy do app ${WEB_UUID} (main -> Coolify)..."
+          curl -fsSL \
+            -H "Authorization: Bearer ${COOLIFY_TOKEN}" \
+            "${COOLIFY_URL}/api/v1/deploy?uuid=${WEB_UUID}&force=true"
+
+      - name: Smoke test (panlabs.tech)
+        if: steps.guard.outputs.enabled == 'true'
+        run: |
+          set -euo pipefail
+          echo "Aguardando o Coolify buildar e subir o container..."
+          sleep 30
+          for i in $(seq 1 12); do
+            code="$(curl -s -o /dev/null -w '%{http_code}' https://panlabs.tech/ || true)"
+            if [ "$code" = "200" ]; then
+              echo "Smoke OK (tentativa $i): HTTP 200"; exit 0
+            fi
+            echo "tentativa $i: HTTP ${code} — aguardando..."; sleep 15
+          done
+          echo "::error::Smoke test falhou — panlabs.tech nao respondeu 200 a tempo."; exit 1
+
+      - name: Deploy pulado (sem secrets do Coolify)
+        if: steps.guard.outputs.enabled != 'true'
+        run: |
+          echo "::notice::COOLIFY_TOKEN ausente — deploy pulado (a build/CD e do Coolify)."
+          echo "::notice::Para ativar: adicione os secrets COOLIFY_URL e COOLIFY_TOKEN (token de API do Coolify)."
