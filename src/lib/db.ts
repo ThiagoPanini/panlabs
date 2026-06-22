@@ -27,6 +27,20 @@ export async function ensureSchema(db: Queryable): Promise<void> {
   await db.query(CLICK_EVENT_DDL);
 }
 
+let migrated = false;
+
+/**
+ * Record one tracked click. Ensures the schema exists once per process, then
+ * inserts a row (the timestamp defaults to now() in the DB).
+ */
+export async function recordClick(slug: string, db: Queryable = getPool()): Promise<void> {
+  if (!migrated) {
+    await ensureSchema(db);
+    migrated = true;
+  }
+  await db.query("INSERT INTO click_event (slug) VALUES ($1)", [slug]);
+}
+
 let pool: Pool | undefined;
 
 /** Lazily-built shared connection pool. Throws if `DATABASE_URL` is unset. */
