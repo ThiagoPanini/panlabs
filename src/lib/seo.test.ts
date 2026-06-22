@@ -13,7 +13,7 @@ describe("siteMetadata", () => {
   });
 
   it("sets a metadataBase so social URLs resolve absolutely", () => {
-    expect(siteMetadata.metadataBase?.href).toContain("panlabs.tech");
+    expect(String(siteMetadata.metadataBase)).toContain("panlabs.tech");
   });
 
   it("declares favicons in multiple sizes", () => {
