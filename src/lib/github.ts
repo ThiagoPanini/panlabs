@@ -1,8 +1,13 @@
 /**
- * GitHub vitality fetch + cache (#12, #14).
+ * GitHub vitality fetch + cache (#12, #14, #13).
  *
- * Pulls the two live signals shown on a card — ⭐ stars and the commit
- * heartbeat (weekly commit totals) — for a single `owner/name` repo.
+ * Pulls the live signals shown on a card for a single `owner/name` repo:
+ * ⭐ stars, total commits, merged PRs and the commit heartbeat (weekly totals).
+ *
+ * Counting semantics (ADR-0013):
+ * - commits = total commits on the default branch, all-time (the repo's whole
+ *   history), read from the `Link: rel="last"` page of `/commits?per_page=1`.
+ * - prs = merged pull requests, all-time, from `search/issues` `total_count`.
  *
  * Resilience (#14):
  * - Responses are cached/revalidated via Next's fetch cache (`next.revalidate`),
@@ -33,6 +38,10 @@ const defaultSleep = (ms: number) => new Promise<void>((resolve) => setTimeout(r
 export interface Vitality {
   /** live stargazers, or null when the repo endpoint is unavailable */
   stars: number | null;
+  /** total commits on the default branch (all-time), or null when unavailable */
+  commits: number | null;
+  /** merged pull requests (all-time), or null when unavailable */
+  prs: number | null;
   /** last 26 weekly commit totals, or null when stats aren't ready */
   weeks: number[] | null;
 }
@@ -92,10 +101,16 @@ export async function fetchVitality(
 
   const init = buildInit(token, revalidate);
 
-  const stars = await fetchStars(repo, init, fetchImpl);
-  const weeks = await fetchWeeks(repo, init, fetchImpl, { retries, retryDelayMs, sleep });
+  // Each signal is independent and degrades to null on its own, so fetch them
+  // concurrently — one slow/failed call never holds up the others.
+  const [stars, commits, prs, weeks] = await Promise.all([
+    fetchStars(repo, init, fetchImpl),
+    fetchCommits(repo, init, fetchImpl),
+    fetchMergedPRs(repo, init, fetchImpl),
+    fetchWeeks(repo, init, fetchImpl, { retries, retryDelayMs, sleep }),
+  ]);
 
-  return { stars, weeks };
+  return { stars, commits, prs, weeks };
 }
 
 /**
@@ -106,7 +121,12 @@ export async function fetchVitality(
 export function withVitality(solution: Solution, vitality: Vitality): Solution {
   return {
     ...solution,
-    stats: { ...solution.stats, stars: vitality.stars ?? solution.stats.stars },
+    stats: {
+      ...solution.stats,
+      stars: vitality.stars ?? solution.stats.stars,
+      commits: vitality.commits ?? solution.stats.commits,
+      prs: vitality.prs ?? solution.stats.prs,
+    },
     weeks: vitality.weeks ?? solution.weeks,
   };
 }
@@ -135,6 +155,53 @@ async function fetchStars(
     if (!res.ok) return null;
     const data = (await res.json()) as { stargazers_count?: number };
     return typeof data.stargazers_count === "number" ? data.stargazers_count : null;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Total commits on the default branch (all-time). GitHub doesn't expose a count
+ * directly, so we ask for a single commit and read the last page number off the
+ * `Link` header — for `per_page=1` that page count equals the commit count.
+ */
+async function fetchCommits(
+  repo: string,
+  init: CachedRequestInit,
+  f: typeof fetch,
+): Promise<number | null> {
+  try {
+    const res = await f(`${API}/repos/${repo}/commits?per_page=1`, init);
+    if (!res.ok) return null;
+    const last = parseLastPage(res.headers.get("link"));
+    if (last != null) return last;
+    // No pagination header ⇒ 0 or 1 commits; count what came back.
+    const data = (await res.json()) as unknown;
+    return Array.isArray(data) ? data.length : null;
+  } catch {
+    return null;
+  }
+}
+
+/** Extract the `page=N` of the `rel="last"` entry from a GitHub Link header. */
+function parseLastPage(link: string | null): number | null {
+  if (!link) return null;
+  const match = link.match(/[?&]page=(\d+)[^>]*>;\s*rel="last"/);
+  return match ? Number(match[1]) : null;
+}
+
+/** Merged pull requests (all-time), via the search API's `total_count`. */
+async function fetchMergedPRs(
+  repo: string,
+  init: CachedRequestInit,
+  f: typeof fetch,
+): Promise<number | null> {
+  try {
+    const q = encodeURIComponent(`repo:${repo} is:pr is:merged`);
+    const res = await f(`${API}/search/issues?q=${q}&per_page=1`, init);
+    if (!res.ok) return null;
+    const data = (await res.json()) as { total_count?: number };
+    return typeof data.total_count === "number" ? data.total_count : null;
   } catch {
     return null;
   }

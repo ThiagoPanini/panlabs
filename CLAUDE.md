@@ -6,7 +6,7 @@ Orientação de domínio antes de qualquer trabalho substantivo:
 
 - [docs/CONTEXT.md](docs/CONTEXT.md) — glossário + invariantes (linguagem comum).
 - [docs/VISION.md](docs/VISION.md) — o que é, posicionamento, escopo e critério de sucesso do V1.
-- [docs/adr/](docs/adr/README.md) — decisões de arquitetura (0001–0012).
+- [docs/adr/](docs/adr/README.md) — decisões de arquitetura (0001–0013).
 
 Design oficial ("Chosen") e faseamento **V1.0 visual / V1.1 backend** em [ADR-0012](docs/adr/0012-design-oficial-chosen-e-faseamento.md). Onde o design contraria um ADR sobre *forma*, **o design vence** ([ADR-0011](docs/adr/0011-produto-primeiro-indicadores-secundarios.md)); ADRs seguem mandando em *intenção e invariantes*.
 

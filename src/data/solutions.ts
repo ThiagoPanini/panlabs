@@ -52,6 +52,7 @@ export const traveltogether: Solution = {
   tagline: "Planejar viagens em grupo, juntos",
   desc: "Caderno de bordo compartilhado: o grupo cadastra a viagem, desenha as paradas cidade a cidade e decide o translado a várias mãos.",
   url: "https://traveltogether.thiagopanini.dev",
+  repo: "ThiagoPanini/traveltogether",
   status: "beta",
   tech: [
     { label: "Next.js", slug: "nextdotjs" },
