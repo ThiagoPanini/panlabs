@@ -10,7 +10,8 @@
 
 .logo {
   display: block;
-  /* keep the brand gradient in high-contrast mode (logo exception) */
+  border-radius: 8px;
+  /* keep the brand mark intact in high-contrast mode (logo exception) */
   forced-color-adjust: none;
 }
 

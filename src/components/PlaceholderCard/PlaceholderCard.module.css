@@ -5,9 +5,10 @@
   background: var(--color-w-022);
   border: var(--border-w-hairline) dashed var(--border-default);
   border-radius: var(--radius-card);
-  /* no hover motion — inert placeholder */
+  /* inert: no hover lift — the draft animates on its own */
 }
 
+/* ---- preview ------------------------------------------------------------- */
 .preview {
   position: relative;
   display: flex;
@@ -17,26 +18,128 @@
   border-bottom: var(--border-w-hairline) dashed var(--border-subtle);
 }
 
-.todo {
+/* mirrors the real card's status pill (top-right), but as a "coming soon" cue */
+.badge {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  padding: var(--space-1) var(--space-2);
+  background: var(--bg-badge);
+  backdrop-filter: blur(6px);
+  border: var(--border-w-hairline) solid var(--color-hover-border);
+  border-radius: var(--radius-pill);
   font-family: var(--font-mono);
-  font-size: var(--fs-card-name);
-  font-weight: var(--fw-bold);
-  letter-spacing: var(--ls-card-name);
-  color: var(--text-faint);
+  font-size: var(--fs-badge);
+  letter-spacing: var(--ls-badge);
+  text-transform: uppercase;
+  color: var(--accent-lilac);
 }
 
+.mark {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+}
+
+.ring {
+  position: absolute;
+  inset: 0;
+  border: var(--border-w-hairline) dashed var(--color-hover-border);
+  border-radius: var(--radius-full);
+  animation: pl-breathe 3.4s ease-in-out infinite;
+}
+
+.plus {
+  font-family: var(--font-mono);
+  font-size: 28px;
+  font-weight: var(--fw-bold);
+  line-height: 1;
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---- body (skeleton draft) ----------------------------------------------- */
 .body {
   display: flex;
   flex: 1;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  gap: var(--space-2-5);
   padding: var(--space-4) var(--space-4-5) var(--space-5);
 }
 
+.line {
+  height: 9px;
+  border-radius: 5px;
+  background: linear-gradient(
+    100deg,
+    var(--color-w-045) 28%,
+    var(--color-w-10) 50%,
+    var(--color-w-045) 72%
+  );
+  background-size: 220% 100%;
+  animation: pl-shimmer 2.6s ease-in-out infinite;
+}
+
+.lineSm {
+  width: 52%;
+}
+
+.lineLg {
+  width: 96%;
+  animation-delay: 0.18s;
+}
+
+.chips {
+  display: flex;
+  gap: var(--space-1-5);
+  margin-top: var(--space-1);
+}
+
+.chip {
+  height: 20px;
+  border-radius: var(--radius-chip);
+  background: linear-gradient(
+    100deg,
+    var(--color-w-045) 28%,
+    var(--color-w-10) 50%,
+    var(--color-w-045) 72%
+  );
+  background-size: 220% 100%;
+  animation: pl-shimmer 2.6s ease-in-out infinite;
+}
+
+.chip:nth-child(1) {
+  width: 56px;
+}
+
+.chip:nth-child(2) {
+  width: 44px;
+  animation-delay: 0.12s;
+}
+
+.chip:nth-child(3) {
+  width: 50px;
+  animation-delay: 0.24s;
+}
+
 .copy {
-  margin: 0;
+  margin: var(--space-1) 0 0;
+  margin-top: auto;
   font-family: var(--font-mono);
   font-size: var(--fs-card-body);
   color: var(--text-muted);
-  text-align: center;
+}
+
+/* a11y: hold the draft still (kept visible) */
+@media (prefers-reduced-motion: reduce) {
+  .ring,
+  .line,
+  .chip {
+    animation: none;
+  }
 }

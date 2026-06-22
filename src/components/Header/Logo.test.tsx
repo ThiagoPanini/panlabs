@@ -3,16 +3,16 @@ import { describe, expect, it } from "vitest";
 import { Logo } from "./Logo";
 
 describe("Logo", () => {
-  it("renders an inline svg mark with an accessible name", () => {
-    const { container } = render(<Logo />);
+  it("renders the brand logo image with an accessible name", () => {
+    render(<Logo />);
     const mark = screen.getByRole("img", { name: "panlabs" });
-    expect(mark.tagName.toLowerCase()).toBe("svg");
-    // a crisp inline vector, not a raster <img>
-    expect(container.querySelector("img")).toBeNull();
+    expect(mark.tagName.toLowerCase()).toBe("img");
+    // the canonical apple-touch-icon raster, not a generic glyph
+    expect(mark).toHaveAttribute("src");
   });
 
   it("forwards a className so the header can size and place it", () => {
     const { container } = render(<Logo className="x" />);
-    expect(container.querySelector("svg.x")).toBeInTheDocument();
+    expect(container.querySelector("img.x")).toBeInTheDocument();
   });
 });

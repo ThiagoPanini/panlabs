@@ -1,17 +1,32 @@
 import styles from "./PlaceholderCard.module.css";
 
 /**
- * Anonymous "// TODO" slot — a derived, inert variant of the solution card
- * (no link, stats, CTA, or motion). Hints at the next experiment on the way.
+ * "Next experiment" slot — reframed as the *draft* of a future solution card:
+ * an "em breve" badge, a breathing brand `+`, and shimmering skeleton lines
+ * standing in for the tagline, copy and tech it will eventually carry. Inert
+ * (no link, stats, CTA), but it reads as a card-in-the-making rather than a
+ * dead `// TODO`.
  */
 export function PlaceholderCard() {
   return (
     <article className={styles.card} aria-label="Próximo experimento a caminho">
       <div className={styles.preview}>
-        <span className={styles.todo}>{"// TODO"}</span>
+        <span className={styles.badge}>em breve</span>
+        <div className={styles.mark} aria-hidden="true">
+          <span className={styles.ring} />
+          <span className={styles.plus}>+</span>
+        </div>
       </div>
+
       <div className={styles.body}>
-        <p className={styles.copy}>mais um experimento a caminho</p>
+        <span className={`${styles.line} ${styles.lineSm}`} aria-hidden="true" />
+        <span className={`${styles.line} ${styles.lineLg}`} aria-hidden="true" />
+        <span className={styles.chips} aria-hidden="true">
+          <span className={styles.chip} />
+          <span className={styles.chip} />
+          <span className={styles.chip} />
+        </span>
+        <p className={styles.copy}>{"// incubando o próximo experimento"}</p>
       </div>
     </article>
   );
