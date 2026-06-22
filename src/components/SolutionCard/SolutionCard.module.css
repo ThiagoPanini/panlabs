@@ -138,6 +138,7 @@
 
 .chipIcon {
   display: block;
+  color: var(--color-gray-25);
   opacity: var(--opacity-tech-icon);
 }
 

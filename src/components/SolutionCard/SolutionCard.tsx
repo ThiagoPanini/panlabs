@@ -1,10 +1,8 @@
 import Image from "next/image";
+import { Icon } from "@/components/Icon/Icon";
 import type { Solution } from "@/data/solutions";
 import { sparkline } from "@/lib/sparkline";
 import styles from "./SolutionCard.module.css";
-
-const ICON_TINT = "c5cdd9";
-const GITHUB_ICON = "https://cdn.simpleicons.org/github/5f656e";
 
 export function SolutionCard({ solution }: { solution: Solution }) {
   const { slug, name, tagline, desc, url, status, tech, stats, weeks, shot, shotBg } = solution;
@@ -36,14 +34,7 @@ export function SolutionCard({ solution }: { solution: Solution }) {
         <ul className={styles.tech}>
           {tech.map((t) => (
             <li key={t.slug} className={styles.chip}>
-              {/* biome-ignore lint/performance/noImgElement: external Simple Icons CDN; self-hosted in V1.1 (#15) */}
-              <img
-                src={`https://cdn.simpleicons.org/${t.slug}/${ICON_TINT}`}
-                alt=""
-                width={12}
-                height={12}
-                className={styles.chipIcon}
-              />
+              <Icon slug={t.slug} size={12} className={styles.chipIcon} />
               {t.label}
             </li>
           ))}
@@ -53,8 +44,7 @@ export function SolutionCard({ solution }: { solution: Solution }) {
           <div className={styles.statGroup}>
             <div className={styles.stat}>
               <span className={styles.statLabel}>
-                {/* biome-ignore lint/performance/noImgElement: external Simple Icons CDN; self-hosted in V1.1 (#15) */}
-                <img src={GITHUB_ICON} alt="" width={9} height={9} />
+                <Icon slug="github" size={9} />
                 stars
               </span>
               <span className={styles.statValue}>
