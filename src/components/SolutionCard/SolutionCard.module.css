@@ -251,3 +251,22 @@
     min-height: 44px;
   }
 }
+
+/* a11y: no lift, no zoom, sparkline shown already-drawn */
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .shot,
+  .card:hover .shot {
+    transform: scale(1.06);
+  }
+
+  .sparkLine {
+    stroke-dashoffset: 0;
+    transition: none;
+  }
+}

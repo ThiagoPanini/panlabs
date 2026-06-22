@@ -80,6 +80,13 @@
   color: var(--text-hero);
 }
 
+/* a11y: freeze the blinking cursor (kept visible) */
+@media (prefers-reduced-motion: reduce) {
+  .cursor {
+    animation: none;
+  }
+}
+
 /* handoff: shrink the hero on small screens, no horizontal overflow */
 @media (max-width: 639px) {
   .inner {
