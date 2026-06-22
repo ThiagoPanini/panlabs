@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
 import { JetBrains_Mono, Manrope } from "next/font/google";
+import { siteMetadata } from "@/lib/seo";
 import "@/styles/theme.css";
 import "@/styles/base.css";
 
@@ -15,11 +15,7 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: "panlabs — catálogo",
-  description:
-    "Laboratório vivo de soluções de software criadas com AI. Experimentos que viraram SaaS reais, versionados e em produção.",
-};
+export const metadata = siteMetadata;
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
