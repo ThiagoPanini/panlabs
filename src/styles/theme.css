@@ -1,0 +1,220 @@
+/* =============================================================================
+   panlabs — theme.css
+   Custom properties espelhando design-system/tokens.json.
+   Fonte-da-verdade: protótipo OFICIAL e único "Chosen" (panlabs.dc.html).
+   Tema único (escuro). Não há tema claro em Chosen — ver handoff.md (lacunas).
+   ============================================================================= */
+
+:root {
+  /* ---- color · primitive · ink ------------------------------------------- */
+  --color-ink-950: #07080a; /* fundo raiz                       */
+  --color-ink-940: #0a0b0d; /* fundo html/body global           */
+  --color-ink-900: #0c0d11; /* superfície do card               */
+
+  /* ---- color · primitive · preview fallback ------------------------------ */
+  --color-shot-epistemix: #101826;
+  --color-shot-traveltogether: #1a1420;
+  --color-shot-querymind: #0d1a1a;
+
+  /* ---- color · primitive · gray ------------------------------------------ */
+  --color-gray-00: #ffffff;
+  --color-gray-05: #f4f5f7;
+  --color-gray-10: #e9eaee;
+  --color-gray-20: #cfd4dc;
+  --color-gray-25: #c5cdd9;
+  --color-gray-30: #aeb6c4;
+  --color-gray-35: #aab0ba;
+  --color-gray-45: #9097a1;
+  --color-gray-55: #7a808a;
+  --color-gray-60: #6a7079;
+  --color-gray-70: #5f656e;
+
+  /* ---- color · primitive · brand ----------------------------------------- */
+  --color-brand-magenta: #c44fd0;
+  --color-brand-violet: #8b5cf6;
+  --color-brand-blue: #3d9be0;
+  --color-brand-violet-light: #9b6cf0;
+  --color-brand-lilac: #a98ff0;
+
+  /* ---- color · primitive · terminal / status ----------------------------- */
+  --color-terminal-green: #45c08a;
+  --color-terminal-blue: #9db4ff;
+  --color-status-idea: #7a808a;
+  --color-status-alpha: #6ea8ff;
+  --color-status-beta: #e0a23a;
+  --color-status-live: #45c08a;
+  --color-star: #e0a23a;
+
+  /* ---- color · primitive · alpha white ----------------------------------- */
+  --color-w-022: rgba(255, 255, 255, 0.022);
+  --color-w-045: rgba(255, 255, 255, 0.045);
+  --color-w-05: rgba(255, 255, 255, 0.05);
+  --color-w-06: rgba(255, 255, 255, 0.06);
+  --color-w-07: rgba(255, 255, 255, 0.07);
+  --color-w-08: rgba(255, 255, 255, 0.08);
+  --color-w-09: rgba(255, 255, 255, 0.09);
+  --color-w-10: rgba(255, 255, 255, 0.1);
+  --color-b-50: rgba(0, 0, 0, 0.5);
+
+  --color-hover-glow: rgba(124, 92, 246, 0.5);
+  --color-hover-border: rgba(155, 108, 240, 0.4);
+
+  /* ---- color · semantic -------------------------------------------------- */
+  --bg-root: var(--color-ink-950);
+  --bg-header: rgba(7, 8, 10, 0.6);
+  --bg-surface: var(--color-ink-900);
+  --bg-card-header: var(--color-w-022);
+  --bg-cta-rest: var(--color-w-05);
+  --bg-chip: var(--color-w-045);
+  --bg-badge: var(--color-b-50);
+
+  --text-max: var(--color-gray-00);
+  --text-strong: var(--color-gray-05);
+  --text-default: var(--color-gray-10);
+  --text-hero: var(--color-gray-35);
+  --text-body: var(--color-gray-45);
+  --text-chip: var(--color-gray-30);
+  --text-muted: var(--color-gray-55);
+  --text-faint: var(--color-gray-70);
+  --text-on-badge: var(--color-gray-20);
+
+  --accent-lilac: var(--color-brand-lilac);
+  --accent-violet: var(--color-brand-violet-light);
+  --accent-star: var(--color-star);
+
+  --feedback-success: var(--color-status-live);
+  --feedback-warning: var(--color-status-beta);
+  --feedback-info: var(--color-status-alpha);
+  --feedback-neutral: var(--color-status-idea);
+
+  --border-subtle: var(--color-w-06);
+  --border-default: var(--color-w-08);
+  --border-header: var(--color-w-07);
+  --border-chip: var(--color-w-09);
+  --border-cta: var(--color-w-10);
+
+  /* ---- gradients --------------------------------------------------------- */
+  --gradient-brand: linear-gradient(120deg, #c44fd0, #8b5cf6, #3d9be0);
+  --gradient-spark-fill: linear-gradient(180deg, rgba(155, 108, 240, 0.35), rgba(155, 108, 240, 0));
+  /* overlay com previewDarken=0.6 (default) */
+  --gradient-preview-overlay: linear-gradient(
+    180deg,
+    rgba(11, 12, 16, 0.18) 0%,
+    rgba(11, 12, 16, 0.43) 52%,
+    rgba(11, 12, 16, 0.82) 100%
+  );
+
+  /* ---- typography -------------------------------------------------------- */
+  /* Famílias carregadas via next/font (CSS vars --font-manrope/--font-jetbrains);
+     fallback aos literais de Chosen mantém fidelidade. */
+  --font-sans: var(--font-manrope), "Manrope", system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), "JetBrains Mono", monospace;
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+  --fw-extrabold: 800;
+
+  /* tamanhos por papel */
+  --fs-hero-title: 44px;
+  --lh-hero-title: 1.08;
+  --ls-hero-title: -1.5px;
+  --fs-hero-prompt: 13px;
+  --fs-hero-lede: 16px;
+  --lh-hero-lede: 1.6;
+  --fs-wordmark: 15px;
+  --ls-wordmark: -0.6px;
+  --fs-nav-meta: 11px;
+  --fs-nav-tagline: 10.5px;
+  --ls-nav-tagline: 0.5px;
+  --fs-section-meta: 11.5px;
+  --fs-card-name: 18px;
+  --ls-card-name: -0.5px;
+  --fs-card-tagline: 13.5px;
+  --fs-card-body: 13px;
+  --lh-card-body: 1.6;
+  --fs-chip: 10.5px;
+  --fs-stat-value: 14px;
+  --fs-stat-label: 8.5px;
+  --ls-stat-label: 0.4px;
+  --fs-badge: 9px;
+  --ls-badge: 0.5px;
+  --fs-cta: 12px;
+
+  /* ---- spacing ----------------------------------------------------------- */
+  --space-0: 0px;
+  --space-1: 4px;
+  --space-1-5: 6px;
+  --space-2: 8px;
+  --space-2-5: 10px;
+  --space-3: 12px;
+  --space-3-5: 14px;
+  --space-4: 16px;
+  --space-4-5: 18px;
+  --space-5: 20px;
+  --space-5-5: 22px;
+  --space-9: 36px;
+  --space-10: 40px;
+  --space-10-5: 42px;
+  --space-15: 60px;
+  --space-24: 96px;
+
+  /* ---- sizing ------------------------------------------------------------ */
+  --size-container-max: 1080px;
+  --size-hero-lede-max: 580px;
+  --size-header-height: 58px;
+  --size-preview-height: 148px;
+  --size-logo: 30px;
+  --size-cursor-w: 13px;
+  --size-cursor-h: 38px;
+  --size-status-dot: 6px;
+  --size-tech-icon: 12px;
+  --size-github-icon: 9px;
+  --size-spark-w: 104px;
+  --size-spark-h: 28px;
+
+  /* ---- radius ------------------------------------------------------------ */
+  --radius-chip: 6px;
+  --radius-control: 8px;
+  --radius-card: 14px;
+  --radius-pill: 20px;
+  --radius-full: 50%;
+
+  /* ---- border width ------------------------------------------------------ */
+  --border-w-hairline: 1px;
+
+  /* ---- shadow ------------------------------------------------------------ */
+  --shadow-card-hover: 0 20px 56px -22px rgba(124, 92, 246, 0.5);
+
+  /* ---- opacity ----------------------------------------------------------- */
+  --opacity-tech-icon: 0.9;
+  --opacity-spark-fill: 0.5;
+
+  /* ---- motion ------------------------------------------------------------ */
+  --duration-cta: 180ms;
+  --duration-card: 220ms;
+  --duration-shot: 300ms;
+  --duration-spark: 1100ms;
+  --duration-blink: 1060ms;
+
+  --easing-card: cubic-bezier(0.2, 0.7, 0.3, 1);
+  --easing-standard: ease;
+
+  /* ---- z-index ----------------------------------------------------------- */
+  --z-header: 1;
+}
+
+/* =============================================================================
+   Keyframes (não inlináveis) — copiados literalmente de Chosen
+   ============================================================================= */
+@keyframes pl-blink {
+  0%,
+  48% {
+    opacity: 1;
+  }
+  52%,
+  100% {
+    opacity: 0;
+  }
+}

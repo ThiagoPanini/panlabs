@@ -1,0 +1,9 @@
+pre-commit:
+  commands:
+    biome:
+      run: npx biome check --staged --no-errors-on-unmatched
+
+commit-msg:
+  commands:
+    commitlint:
+      run: npx commitlint --edit {1}
