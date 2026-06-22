@@ -7,9 +7,9 @@ name: deploy
 # aqui (não usamos GHCR) — este workflow só chama a API de deploy do Coolify
 # para ele puxar e buildar o commit novo da main.
 #
-# Guardado por COOLIFY_TOKEN: sem o secret, o passo é pulado (não falha), então
-# é seguro mergear antes de configurar os secrets.
-#   Secrets necessários: COOLIFY_URL, COOLIFY_TOKEN (token de API do Coolify).
+# Secrets OBRIGATÓRIOS: COOLIFY_URL e COOLIFY_TOKEN (token de API do Coolify).
+# Se qualquer um faltar, o job FALHA em vermelho (antes ele pulava em silêncio
+# e o run ficava verde — um deploy que nunca aconteceu passava despercebido).
 # O UUID do app não é segredo (aparece no hostname *.sslip.io público), então
 # fica fixo aqui.
 
@@ -33,19 +33,21 @@ jobs:
     name: deploy (coolify)
     runs-on: ubuntu-latest
     steps:
-      - id: guard
+      - name: Require Coolify secrets
         env:
           COOLIFY_URL: ${{ secrets.COOLIFY_URL }}
           COOLIFY_TOKEN: ${{ secrets.COOLIFY_TOKEN }}
         run: |
-          if [ -n "$COOLIFY_TOKEN" ] && [ -n "$COOLIFY_URL" ]; then
-            echo "enabled=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "enabled=false" >> "$GITHUB_OUTPUT"
+          missing=""
+          [ -z "$COOLIFY_URL" ] && missing="$missing COOLIFY_URL"
+          [ -z "$COOLIFY_TOKEN" ] && missing="$missing COOLIFY_TOKEN"
+          if [ -n "$missing" ]; then
+            echo "::error::Deploy abortado — secret(s) ausente(s):${missing}. Configure em Settings → Secrets and variables → Actions e re-rode o workflow."
+            exit 1
           fi
+          echo "Secrets do Coolify presentes — seguindo com o deploy."
 
       - name: Trigger Coolify deploy
-        if: steps.guard.outputs.enabled == 'true'
         env:
           COOLIFY_URL: ${{ secrets.COOLIFY_URL }}
           COOLIFY_TOKEN: ${{ secrets.COOLIFY_TOKEN }}
@@ -57,7 +59,6 @@ jobs:
             "${COOLIFY_URL}/api/v1/deploy?uuid=${WEB_UUID}&force=true"
 
       - name: Smoke test (panlabs.tech)
-        if: steps.guard.outputs.enabled == 'true'
         run: |
           set -euo pipefail
           echo "Aguardando o Coolify buildar e subir o container..."
@@ -70,9 +71,3 @@ jobs:
             echo "tentativa $i: HTTP ${code} — aguardando..."; sleep 15
           done
           echo "::error::Smoke test falhou — panlabs.tech nao respondeu 200 a tempo."; exit 1
-
-      - name: Deploy pulado (faltam secrets do Coolify)
-        if: steps.guard.outputs.enabled != 'true'
-        run: |
-          echo "::notice::Deploy pulado — exige os secrets COOLIFY_URL e COOLIFY_TOKEN."
-          echo "::notice::COOLIFY_TOKEN: ${{ secrets.COOLIFY_TOKEN != '' && 'definido' || 'AUSENTE' }} | COOLIFY_URL: ${{ secrets.COOLIFY_URL != '' && 'definido' || 'AUSENTE' }}"
