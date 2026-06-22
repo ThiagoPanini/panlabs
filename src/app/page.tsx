@@ -1,13 +1,13 @@
-import styles from "./page.module.css";
+import { Header } from "@/components/Header/Header";
+import { HeroTerminal } from "@/components/HeroTerminal/HeroTerminal";
 
 export default function Home() {
   return (
     <>
-      <header className={styles.header}>
-        <span className={styles.wordmark}>panlabs</span>
-        <span className={styles.meta}>/ catálogo</span>
-      </header>
-      <main className={styles.main} />
+      <Header />
+      <main>
+        <HeroTerminal />
+      </main>
     </>
   );
 }
