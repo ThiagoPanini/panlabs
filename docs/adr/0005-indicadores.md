@@ -1,6 +1,6 @@
 # ADR-0005: Indicadores — vitalidade e popularidade honesta
 
-- **Status:** aceito (2026-06-21) · **ênfase recontextualizada por [ADR-0011](0011-produto-primeiro-indicadores-secundarios.md)** — este ADR define o *set candidato* de indicadores; eles são **secundários ao produto** e sua prioridade/forma na face do card é decisão do design.
+- **Status:** aceito (2026-06-21) · **ênfase recontextualizada por [ADR-0011](0011-produto-primeiro-indicadores-secundarios.md)** — este ADR define o *set candidato* de indicadores; eles são **secundários ao produto** e sua prioridade/forma na face do card é decisão do design · **forma instanciada pelo design oficial em [ADR-0012](0012-design-oficial-chosen-e-faseamento.md)**.
 
 ## Contexto
 
@@ -26,3 +26,5 @@ Indicadores na face do card:
 - **Commits totais (absoluto)** — número grande sem significado; usa-se o heartbeat.
 - **Forks / watchers / contributors** — enganosos num lab solo (~0 ou ~1).
 - **PRs / issues na face** — definição ambígua; ficam para detalhe/V2 (issues abertas são a ponte barata do feature-request→issue do V2).
+
+> **Nota (2026-06-22).** O design oficial "Chosen" **reinstanciou `commits` (absoluto) e `PRs` na face** do card, pela autoridade de forma do design ([ADR-0011](0011-produto-primeiro-indicadores-secundarios.md)/[ADR-0012](0012-design-oficial-chosen-e-faseamento.md)). As rejeições acima continuam válidas como *preocupação* — definir a semântica honesta de cada um é trabalho do **V1.1** (ao trocar os números curados pelos dados live do GitHub).
