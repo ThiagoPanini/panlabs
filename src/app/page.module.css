@@ -1,0 +1,27 @@
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  height: var(--size-header-height);
+  padding: 0 var(--space-5-5);
+  background: var(--bg-header);
+  border-bottom: var(--border-w-hairline) solid var(--border-header);
+}
+
+.wordmark {
+  font-family: var(--font-sans);
+  font-size: var(--fs-wordmark);
+  font-weight: var(--fw-extrabold);
+  letter-spacing: var(--ls-wordmark);
+  color: var(--text-strong);
+}
+
+.meta {
+  font-family: var(--font-mono);
+  font-size: var(--fs-nav-meta);
+  color: var(--text-faint);
+}
+
+.main {
+  min-height: 60vh;
+}
