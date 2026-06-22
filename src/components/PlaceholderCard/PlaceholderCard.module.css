@@ -11,18 +11,16 @@
 /* ---- preview ------------------------------------------------------------- */
 .preview {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   height: var(--size-preview-height);
   border-bottom: var(--border-w-hairline) dashed var(--border-subtle);
 }
 
-/* mirrors the real card's status pill (top-right), but as a "coming soon" cue */
+/* pinned to the same spot as the real card's status pill (preview floor,
+   right) so "em breve" lines up with the live/beta badges across the grid */
 .badge {
   position: absolute;
-  top: var(--space-3);
-  right: var(--space-3);
+  right: var(--space-4);
+  bottom: var(--space-3);
   padding: var(--space-1) var(--space-2);
   background: var(--bg-badge);
   backdrop-filter: blur(6px);
@@ -33,34 +31,6 @@
   letter-spacing: var(--ls-badge);
   text-transform: uppercase;
   color: var(--accent-lilac);
-}
-
-.mark {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 46px;
-  height: 46px;
-}
-
-.ring {
-  position: absolute;
-  inset: 0;
-  border: var(--border-w-hairline) dashed var(--color-hover-border);
-  border-radius: var(--radius-full);
-  animation: pl-breathe 3.4s ease-in-out infinite;
-}
-
-.plus {
-  font-family: var(--font-mono);
-  font-size: 28px;
-  font-weight: var(--fw-bold);
-  line-height: 1;
-  background: var(--gradient-brand);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
 }
 
 /* ---- body (skeleton draft) ----------------------------------------------- */
@@ -137,9 +107,19 @@
 
 /* a11y: hold the draft still (kept visible) */
 @media (prefers-reduced-motion: reduce) {
-  .ring,
   .line,
   .chip {
     animation: none;
+  }
+}
+
+/* co-located keyframe (CSS Modules scope animation-name; a global keyframe
+   would never match the scoped reference) */
+@keyframes pl-shimmer {
+  from {
+    background-position: 180% 0;
+  }
+  to {
+    background-position: -80% 0;
   }
 }

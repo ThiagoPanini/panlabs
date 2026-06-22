@@ -100,9 +100,9 @@
      title so the card name reads on near-solid ink (request: vertical fade). */
   --gradient-preview-overlay: linear-gradient(
     180deg,
-    rgba(7, 8, 10, 0) 0%,
-    rgba(8, 9, 12, 0.1) 42%,
-    rgba(9, 10, 14, 0.52) 74%,
+    rgba(7, 8, 10, 0.4) 0%,
+    rgba(8, 9, 12, 0.6) 42%,
+    rgba(9, 10, 14, 0.9) 74%,
     rgba(12, 13, 17, 0.94) 100%
   );
 
@@ -207,57 +207,7 @@
   --z-header: 1;
 }
 
-/* =============================================================================
-   Keyframes (não inlináveis) — copiados literalmente de Chosen
-   ============================================================================= */
-@keyframes pl-blink {
-  0%,
-  48% {
-    opacity: 1;
-  }
-  52%,
-  100% {
-    opacity: 0;
-  }
-}
-
-/* hero: typewriter reveal of `ls ./panlabs` (clips an inline-block by width;
-   max-width clamps to the real text so the caret lands flush after it) */
-@keyframes pl-type {
-  from {
-    max-width: 0;
-  }
-  to {
-    max-width: var(--type-target, 100%);
-  }
-}
-
-/* cta: brand outline that flows around the button on hover */
-@keyframes pl-cta-flow {
-  to {
-    background-position: 200% 50%;
-  }
-}
-
-/* placeholder: slow brand-tinted breathing on the "next slot" mark */
-@keyframes pl-breathe {
-  0%,
-  100% {
-    opacity: 0.55;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.06);
-  }
-}
-
-/* placeholder: skeleton shimmer sweeping the draft lines */
-@keyframes pl-shimmer {
-  from {
-    background-position: 180% 0;
-  }
-  to {
-    background-position: -80% 0;
-  }
-}
+/* NB: animation @keyframes live INSIDE each component's *.module.css, not here.
+   CSS Modules scope `animation-name` references to a hashed local name, so a
+   keyframe declared in this global file would never match the scoped reference
+   and the animation would silently no-op. Co-locating keeps both in scope. */

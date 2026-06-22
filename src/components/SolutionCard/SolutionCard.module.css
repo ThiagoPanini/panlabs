@@ -29,7 +29,7 @@
   object-position: top center;
   /* previewBlur 2.5 + darken 0.6 (Chosen defaults); base scale masks blur edges */
   transform: scale(1.06);
-  filter: blur(2.5px) brightness(0.76);
+  filter: blur(1.5px) brightness(0.76);
   transition: transform var(--duration-shot) var(--easing-standard);
 }
 
@@ -335,5 +335,13 @@
   .cta:hover .ctaArrow,
   .cta:focus-visible .ctaArrow {
     transform: none;
+  }
+}
+
+/* co-located keyframe (CSS Modules scope animation-name; a global keyframe
+   would never match the scoped reference) */
+@keyframes pl-cta-flow {
+  to {
+    background-position: 200% 50%;
   }
 }

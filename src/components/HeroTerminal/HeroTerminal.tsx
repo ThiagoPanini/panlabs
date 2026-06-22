@@ -1,8 +1,24 @@
+import Image from "next/image";
 import styles from "./HeroTerminal.module.css";
 
 export function HeroTerminal() {
   return (
     <section className={styles.hero}>
+      {/* full-bleed cover photo, blurred + darkened so it sits behind the
+          terminal copy without stealing focus or hurting legibility.
+          Tune blur/darkness in HeroTerminal.module.css (.hero knobs). */}
+      <div className={styles.cover} aria-hidden="true">
+        <Image
+          src="/assets/hero-cover-v2.png"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className={styles.coverImg}
+        />
+        <span className={styles.coverScrim} />
+      </div>
+
       <div className={styles.inner}>
         <div className={styles.prompt}>
           <span className={styles.user}>panini@panlabs</span>
