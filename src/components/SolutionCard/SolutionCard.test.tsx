@@ -42,4 +42,10 @@ describe("SolutionCard", () => {
     const { container } = render(<SolutionCard solution={epistemix} />);
     expect(container.querySelector("polyline")).toBeInTheDocument();
   });
+
+  it("hides decorative graphics from assistive tech", () => {
+    render(<SolutionCard solution={epistemix} />);
+    // the sparkline and icons are decorative; the numbers already convey the data
+    expect(screen.queryByRole("img")).not.toBeInTheDocument();
+  });
 });

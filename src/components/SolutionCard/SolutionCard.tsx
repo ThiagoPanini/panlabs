@@ -82,8 +82,7 @@ export function SolutionCard({ solution }: { solution: Solution }) {
               width={104}
               height={28}
               preserveAspectRatio="none"
-              role="img"
-              aria-label="Atividade recente de commits"
+              aria-hidden="true"
             >
               <defs>
                 <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">

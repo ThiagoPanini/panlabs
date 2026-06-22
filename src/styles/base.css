@@ -37,3 +37,17 @@ img,
 svg {
   display: block;
 }
+
+/* keyboard focus only — no change for pointer users */
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--accent-violet);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
