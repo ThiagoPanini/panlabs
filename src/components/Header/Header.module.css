@@ -8,6 +8,11 @@
   border-bottom: var(--border-w-hairline) solid var(--border-header);
 }
 
+.logo {
+  display: block;
+  border-radius: var(--radius-full);
+}
+
 .wordmark {
   font-family: var(--font-sans);
   font-size: var(--fs-wordmark);
@@ -22,6 +27,22 @@
   color: var(--text-faint);
 }
 
-.main {
-  min-height: 60vh;
+.spacer {
+  flex: 1;
+}
+
+.tagline {
+  font-family: var(--font-mono);
+  font-size: var(--fs-nav-tagline);
+  letter-spacing: var(--ls-nav-tagline);
+  color: var(--color-gray-60);
+  white-space: nowrap;
+}
+
+.astBlue {
+  color: var(--color-brand-blue);
+}
+
+.astViolet {
+  color: var(--color-brand-violet-light);
 }
