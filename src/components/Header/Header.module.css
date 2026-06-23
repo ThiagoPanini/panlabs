@@ -1,16 +1,26 @@
 .header {
+  /* "barra fixa" (Chosen): a barra translúcida flutua sobre o conteúdo rolado;
+     o backdrop-filter borra o que passa por baixo (precisa do --bg-header com
+     alpha). z-index garante o empilhamento acima do conteúdo. */
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
   display: flex;
   align-items: center;
   gap: var(--space-3);
   height: var(--size-header-height);
   padding: 0 var(--space-5-5);
   background: var(--bg-header);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-bottom: var(--border-w-hairline) solid var(--border-header);
 }
 
 .logo {
   display: block;
-  border-radius: 8px;
+  /* marca circular (Chosen). NB: o asset canônico deveria ser um SVG — o
+     raster app-icon pode recortar imperfeito no círculo até ele ser produzido. */
+  border-radius: var(--radius-full);
   /* keep the brand mark intact in high-contrast mode (logo exception) */
   forced-color-adjust: none;
 }

@@ -10,7 +10,8 @@ interface LogoProps {
  * panlabs brand logo. Renders the canonical apple-touch-icon raster (the same
  * mark used as the home-screen/app icon) so the header carries the real brand
  * face instead of a generic terminal glyph. Fixed, above-the-fold, so it loads
- * with `priority`; the header CSS rounds the corners.
+ * with `priority`; the header CSS clips it to a circle (Chosen). A canonical
+ * SVG brand mark is still pending — open asset task (see docs/design).
  */
 export function Logo({ size = 30, className }: LogoProps) {
   return (

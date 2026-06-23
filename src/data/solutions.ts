@@ -2,7 +2,7 @@ export type SolutionStatus = "live" | "beta";
 
 export interface TechBadge {
   label: string;
-  /** Simple Icons slug, used to build the CDN icon URL */
+  /** Simple Icons slug → self-hosted inline path in src/lib/icons.ts */
   slug: string;
 }
 
