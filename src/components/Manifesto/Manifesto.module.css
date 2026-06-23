@@ -1,0 +1,160 @@
+.section {
+  background: linear-gradient(180deg, var(--color-ink-950), var(--color-ink-940));
+  border-top: var(--border-w-hairline) solid var(--border-subtle);
+}
+
+.inner {
+  max-width: var(--size-container-max);
+  margin: 0 auto;
+  padding: 84px var(--space-10) 100px;
+}
+
+/* ---- brand moment (closing flourish, below the tenets) ------------------- */
+.logoMoment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  /* sits last now: separate it from the grid above; the section padding-bottom
+     handles the trailing space below */
+  margin-top: 64px;
+}
+
+.ringWrap {
+  position: relative;
+  width: 230px;
+  height: 230px;
+}
+
+.ringSvg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  /* start the stroke at 12 o'clock so it draws clockwise from the top */
+  transform: rotate(-90deg);
+}
+
+/* the gradient ring strokes itself in once the moment reveals (draw-on) */
+.ring {
+  --len: 635;
+  stroke-dasharray: var(--len);
+  stroke-dashoffset: var(--len);
+  transition: stroke-dashoffset var(--duration-draw) var(--easing-standard) 0.1s;
+}
+
+.logoMoment[data-shown="true"] .ring {
+  stroke-dashoffset: 0;
+}
+
+.ringStop0 {
+  stop-color: var(--color-brand-magenta);
+}
+
+.ringStop1 {
+  stop-color: var(--color-brand-violet);
+}
+
+.ringStop2 {
+  stop-color: var(--color-brand-blue);
+}
+
+/* the mark breathes a soft violet glow at rest */
+.avatar {
+  position: absolute;
+  inset: 20px;
+  border-radius: var(--radius-full);
+  animation: manifesto-pulse var(--duration-pulse) ease-in-out infinite;
+}
+
+.avatarImg {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+}
+
+/* ---- manifesto prompt ---------------------------------------------------- */
+.promptRow {
+  margin-bottom: 28px;
+}
+
+/* ---- claim cards --------------------------------------------------------- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4-5);
+}
+
+.card {
+  height: 100%;
+  background: var(--bg-surface);
+  border: var(--border-w-hairline) solid var(--border-default);
+  border-radius: var(--radius-card);
+  padding: 26px 28px;
+}
+
+.cardIndex {
+  margin-bottom: var(--space-3-5);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  color: var(--text-faint);
+}
+
+.cardTitle {
+  margin: 0 0 var(--space-2-5);
+  font-family: var(--font-sans);
+  font-size: 23px;
+  font-weight: var(--fw-bold);
+  letter-spacing: -0.5px;
+  color: var(--text-strong);
+  white-space: nowrap;
+}
+
+.cardGloss {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+/* ---- responsive ---------------------------------------------------------- */
+@media (max-width: 639px) {
+  .inner {
+    padding: 56px var(--space-5) 72px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cardTitle {
+    white-space: normal;
+  }
+}
+
+/* a11y: ring shown already-drawn, mark glow stilled (mark stays put + visible) */
+@media (prefers-reduced-motion: reduce) {
+  .ring {
+    stroke-dashoffset: 0;
+    transition: none;
+  }
+
+  .avatar {
+    animation: none;
+  }
+}
+
+/* co-located keyframe (CSS Modules scope animation-name; a global keyframe
+   would never match the scoped reference) */
+@keyframes manifesto-pulse {
+  0%,
+  100% {
+    box-shadow: var(--shadow-logo-rest);
+  }
+  50% {
+    box-shadow: var(--shadow-logo-peak);
+  }
+}

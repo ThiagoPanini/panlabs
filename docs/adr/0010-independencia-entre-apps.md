@@ -4,7 +4,7 @@
 
 ## Contexto
 
-Risco de importar linguagem, design ou contexto das outras soluções do autor (epistemix, traveltogether) para o panlabs, tratando seus documentos como DNA herdado.
+Risco de importar linguagem, design ou contexto das outras soluções do autor (ethitorial, travelmanager) para o panlabs, tratando seus documentos como DNA herdado.
 
 ## Decisão
 
@@ -12,5 +12,5 @@ panlabs é **product/design-independente**. Nenhum `CONTEXT.md`/`DESIGN.md`/`PRO
 
 ## Consequências
 
-- Cada decisão de produto/design se justifica **por si** — nunca "porque o epistemix faz assim".
+- Cada decisão de produto/design se justifica **por si** — nunca "porque o ethitorial faz assim".
 - Evita-se coerência falsa por herança.

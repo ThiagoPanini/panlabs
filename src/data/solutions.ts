@@ -27,13 +27,13 @@ export interface Solution {
   shotBg: string;
 }
 
-export const epistemix: Solution = {
-  slug: "epistemix",
-  name: "epistemix",
+export const ethitorial: Solution = {
+  slug: "ethitorial",
+  name: "ethitorial",
   tagline: "Hub pessoal de aprendizado",
   desc: "Blog, cursos, livros, certificações e apresentações técnicas reunidos num só lugar para registrar e compartilhar o que estudo.",
-  url: "https://epistemix.dev",
-  repo: "ThiagoPanini/epistemix",
+  url: "https://ethitorial.panlabs.tech",
+  repo: "ThiagoPanini/ethitorial",
   status: "live",
   tech: [
     { label: "Next.js", slug: "nextdotjs" },
@@ -42,17 +42,17 @@ export const epistemix: Solution = {
   ],
   stats: { stars: 9, commits: 248, prs: 14 },
   weeks: [2, 3, 1, 4, 5, 3, 6, 4, 7, 5, 8, 6, 9, 7, 6, 8, 10, 7, 9, 11, 8, 10, 9, 12, 10, 13],
-  shot: "/assets/shot-epistemix.png",
+  shot: "/assets/shot-ethitorial.png",
   shotBg: "#101826",
 };
 
-export const traveltogether: Solution = {
-  slug: "traveltogether",
-  name: "traveltogether",
+export const travelmanager: Solution = {
+  slug: "travelmanager",
+  name: "travelmanager",
   tagline: "Planejar viagens em grupo, juntos",
   desc: "Caderno de bordo compartilhado: o grupo cadastra a viagem, desenha as paradas cidade a cidade e decide o translado a várias mãos.",
-  url: "https://traveltogether.thiagopanini.dev",
-  repo: "ThiagoPanini/traveltogether",
+  url: "https://travelmanager.panlabs.tech",
+  repo: "ThiagoPanini/travelmanager",
   status: "beta",
   tech: [
     { label: "Next.js", slug: "nextdotjs" },
@@ -61,8 +61,8 @@ export const traveltogether: Solution = {
   ],
   stats: { stars: 6, commits: 132, prs: 9 },
   weeks: [0, 1, 0, 2, 1, 3, 2, 4, 3, 2, 5, 4, 6, 5, 7, 6, 5, 8, 7, 9, 8, 10, 9, 11, 10, 12],
-  shot: "/assets/shot-traveltogether.png",
+  shot: "/assets/shot-travelmanager.png",
   shotBg: "#1a1420",
 };
 
-export const solutions: Solution[] = [epistemix, traveltogether];
+export const solutions: Solution[] = [ethitorial, travelmanager];

@@ -49,6 +49,10 @@ nunca silenciada.
 | [components/solution-card.md](components/solution-card.md) | Card de Solução: preview, stats, sparkline, CTA `/go` |
 | [components/slot-proximo-experimento.md](components/slot-proximo-experimento.md) | Placeholder inerte do próximo experimento |
 | [components/icon.md](components/icon.md) | Ícones de marca inline, auto-hospedados |
+| [components/reveal.md](components/reveal.md) | Primitivos das camadas: `Reveal` (scroll-driven) + `Prompt` |
+| [components/manifesto.md](components/manifesto.md) | Camada 1: momento de marca + tenets |
+| [components/domain-architecture.md](components/domain-architecture.md) | Camada 2: pilares → conectores → domínio único |
+| [components/footer.md](components/footer.md) | Camada 3: fechamento de terminal (`contentinfo`) |
 | [como-adicionar-uma-solucao.md](como-adicionar-uma-solucao.md) | Guia operacional: nova Solução no catálogo |
 | [procedencia-e-deltas.md](procedencia-e-deltas.md) | Auditoria Chosen → as-built + log de reconciliação |
 

@@ -27,9 +27,9 @@ describe("ensureSchema", () => {
 describe("recordClick", () => {
   it("inserts one click_event row, passing the slug as a bound parameter", async () => {
     const { db, calls } = fakeDb();
-    await recordClick("epistemix", db);
+    await recordClick("ethitorial", db);
     const insert = calls.find((c) => /insert into click_event/i.test(c.sql));
     expect(insert).toBeDefined();
-    expect(insert?.params).toEqual(["epistemix"]);
+    expect(insert?.params).toEqual(["ethitorial"]);
   });
 });

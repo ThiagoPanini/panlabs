@@ -91,8 +91,16 @@ traduzir, não mudar caixa):
 | `$ touch <slug>` | CTA do card | ação "visitar" |
 | `em breve` | badge do slot do próximo experimento | sinal de "vindo" |
 | `// incubando o próximo experimento` | copy do slot | legenda do placeholder |
+| `panini@panlabs:~$ cat manifesto.txt` | Manifesto (via `Prompt`) | abre a camada 1 |
+| `// arquitetura` · `domínio único` | DomainArchitecture (eyebrow + `h2`) | abre a camada 2 |
+| `// soluções plugadas no domínio` | card de domínio | nota do diagrama |
+| `soluções no ar` · `preview ao vivo` | chips do card de domínio | sinais (não métricas) |
+| `panini@panlabs:~$ cat next_steps.md` | Footer (via `Prompt`) | abre a camada 3 |
+| `keep building and sharing` | Footer headline (caret piscando) | fechamento — **sem CTA** |
+| `dark-native · pt-BR · Manrope + JetBrains Mono · sem CDN` | Footer colofão | colofão honrando os inegociáveis |
 
-Nomes de Solução são **lowercase** (`epistemix`, `traveltogether`) — não capitalizar.
+Nomes de Solução são **lowercase** (`epistemix`, `traveltogether`) — não capitalizar. A copy das camadas
+(tenets do Manifesto, pilares da arquitetura) é **editorial inline** no componente, não token.
 
 **Caveat de sincronia de copy (atenção do dono):** existem 3 variações próximas da tagline-mestra —
 o hero diz "soluções de **softwares**" ([`HeroTerminal.tsx`](../../src/components/HeroTerminal/HeroTerminal.tsx)),
@@ -103,8 +111,10 @@ unificar, estes são os pontos.
 ## Movimento
 
 Durações e easings são tokens: `--duration-cta 180ms`, `--duration-card 220ms`, `--duration-shot 300ms`,
-`--duration-spark 1100ms`, `--duration-blink 1060ms`; `--easing-card cubic-bezier(0.2,0.7,0.3,1)`,
-`--easing-standard ease`.
+`--duration-spark 1100ms`, `--duration-blink 1060ms`, `--duration-reveal 900ms`, `--duration-draw 1500ms`,
+`--duration-pulse 3400ms`; `--easing-card cubic-bezier(0.2,0.7,0.3,1)`, `--easing-standard ease`. Os três
+últimos durations e os shadows `--shadow-logo-rest/peak` e `--shadow-domain-card` nasceram com as **camadas
+de scroll**.
 
 **Regra crítica — keyframes co-localizadas.** CSS Modules escopam `animation-name` para um nome hasheado
 local; uma `@keyframes` declarada no `theme.css` global **nunca** casaria com a referência escopada e a
@@ -120,6 +130,10 @@ Inventário de animações:
 | `pl-cta-flow` | `SolutionCard.module.css` | fluxo do anel de gradiente no CTA (hover/focus) |
 | `pl-shimmer` | `PlaceholderCard.module.css` | shimmer das linhas/chips skeleton |
 | sparkline draw | `SolutionCard.module.css` | `stroke-dashoffset 260→0` no hover (sem keyframe; transição) |
+| reveal ao rolar | `Reveal.module.css` | fade + `translateY` ao entrar na viewport (`[data-shown]`; sem keyframe — transição). Ver [reveal.md](components/reveal.md) |
+| traço SVG (draw) | `Manifesto`/`DomainArchitecture` `.module.css` | `stroke-dashoffset --len→0` ao revelar (anel + conectores; sem keyframe; transição `--duration-draw`) |
+| `manifesto-pulse` | `Manifesto.module.css` | glow do logo oscila entre `--shadow-logo-rest/peak` (`--duration-pulse`) |
+| `footer-blink` | `Footer.module.css` | caret do rodapé pisca (`--duration-blink`, step-end) |
 
 Todo componente animado tem bloco `prefers-reduced-motion` — ver [accessibility.md](accessibility.md).
 
@@ -134,6 +148,7 @@ decisões conscientes (runtime de borda, mask-composite, etc.). Ao editar um, aj
 | Gradiente do anel do CTA `#c44fd0,#8b5cf6,#3d9be0,#8b5cf6,#c44fd0` (5 paradas) | `SolutionCard.module.css` `.cta::before` | `--gradient-brand` (3 paradas) | Precisa de 5 paradas para o `pl-cta-flow` correr; `mask-composite` desenha só no anel |
 | `<linearGradient>` da sparkline `#9b6cf0` (stops 0.35→0) | `SolutionCard.tsx` `<defs>` | `--color-brand-violet-light` / `--gradient-spark-fill` | SVG inline com id por slug (`plspark-${slug}`) para não colidir entre cards |
 | Scrim do hero em `rgba(7,8,10,·)` | `HeroTerminal.module.css` `.coverScrim` | `--color-ink-950` (`#07080a`) | Gradiente calculado a partir do knob local `--hero-cover-scrim` |
+| Brand wash `rgba(196,79,208,.2),rgba(139,92,246,.15),rgba(61,155,224,.18)` | `DomainArchitecture.module.css` `.domainCardHead` | `--gradient-brand` (magenta→violet→blue) | Tinta translúcida da assinatura; alphas específicos do efeito, sem token-espelho |
 | `blur(1.5px)`, `stroke-width:1.6`, `stroke-dasharray:260` | `SolutionCard.module.css` | — (medidas finas de efeito) | Ajustes finos sem token dedicado |
 | Knobs do cover `--hero-cover-blur/brightness/scrim` | `HeroTerminal.module.css` `.hero` | — (locais, intencionais) | Pontos de tunagem do hero, escopados ao componente |
 

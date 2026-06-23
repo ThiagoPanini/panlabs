@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
-import { epistemix } from "@/data/solutions";
+import { ethitorial } from "@/data/solutions";
 import { fetchVitality, withVitality } from "./github";
 
 /** Build a fake `fetch` that answers by URL substring. */
@@ -18,10 +18,10 @@ const weeks52 = Array.from({ length: 52 }, (_, i) => ({ total: i }));
 describe("fetchVitality", () => {
   it("returns live stars from the repo endpoint", async () => {
     const fetchImpl = fakeFetch({
-      "/repos/ThiagoPanini/epistemix": { body: { stargazers_count: 9 } },
+      "/repos/ThiagoPanini/ethitorial": { body: { stargazers_count: 9 } },
       "/stats/commit_activity": { body: weeks52 },
     });
-    const v = await fetchVitality("ThiagoPanini/epistemix", { fetchImpl });
+    const v = await fetchVitality("ThiagoPanini/ethitorial", { fetchImpl });
     expect(v.stars).toBe(9);
   });
 
@@ -65,10 +65,10 @@ describe("fetchVitality", () => {
 
   it("reduces the 52-week commit_activity to the last 26 weekly totals", async () => {
     const fetchImpl = fakeFetch({
-      "/repos/ThiagoPanini/epistemix": { body: { stargazers_count: 9 } },
+      "/repos/ThiagoPanini/ethitorial": { body: { stargazers_count: 9 } },
       "/stats/commit_activity": { body: weeks52 },
     });
-    const v = await fetchVitality("ThiagoPanini/epistemix", { fetchImpl });
+    const v = await fetchVitality("ThiagoPanini/ethitorial", { fetchImpl });
     expect(v.weeks).toHaveLength(26);
     expect(v.weeks).toEqual(Array.from({ length: 26 }, (_, i) => i + 26));
   });
@@ -162,7 +162,7 @@ describe("fetchVitality", () => {
 
 describe("withVitality", () => {
   it("overlays every live signal (stars, commits, prs, weeks) onto a solution", () => {
-    const live = withVitality(epistemix, { stars: 42, commits: 500, prs: 73, weeks: [1, 2, 3] });
+    const live = withVitality(ethitorial, { stars: 42, commits: 500, prs: 73, weeks: [1, 2, 3] });
     expect(live.stats.stars).toBe(42);
     expect(live.stats.commits).toBe(500);
     expect(live.stats.prs).toBe(73);
@@ -170,10 +170,10 @@ describe("withVitality", () => {
   });
 
   it("keeps curated values for any signal that came back null", () => {
-    const live = withVitality(epistemix, { stars: null, commits: null, prs: null, weeks: null });
-    expect(live.stats.stars).toBe(epistemix.stats.stars);
-    expect(live.stats.commits).toBe(epistemix.stats.commits);
-    expect(live.stats.prs).toBe(epistemix.stats.prs);
-    expect(live.weeks).toEqual(epistemix.weeks);
+    const live = withVitality(ethitorial, { stars: null, commits: null, prs: null, weeks: null });
+    expect(live.stats.stars).toBe(ethitorial.stats.stars);
+    expect(live.stats.commits).toBe(ethitorial.stats.commits);
+    expect(live.stats.prs).toBe(ethitorial.stats.prs);
+    expect(live.weeks).toEqual(ethitorial.weeks);
   });
 });

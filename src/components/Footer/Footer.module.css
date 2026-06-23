@@ -1,0 +1,61 @@
+.footer {
+  background: var(--color-ink-940);
+  border-top: var(--border-w-hairline) solid var(--border-subtle);
+}
+
+.inner {
+  max-width: var(--size-container-max);
+  margin: 0 auto;
+  padding: 48px var(--space-10) 104px;
+  font-family: var(--font-mono);
+  line-height: 1.9;
+}
+
+.headline {
+  margin: 2px 0 0;
+  font-size: 15px;
+  color: var(--text-default);
+}
+
+/* editor-style caret left blinking after the sign-off (no input follows) */
+.caret {
+  display: inline-block;
+  width: 8px;
+  height: 15px;
+  margin-left: 3px;
+  vertical-align: middle;
+  background: var(--accent-violet);
+  animation: footer-blink var(--duration-blink) step-end infinite;
+}
+
+.colophon {
+  margin: var(--space-3-5) 0 0;
+  font-size: 11px;
+  color: var(--text-faint);
+}
+
+@media (max-width: 639px) {
+  .inner {
+    padding: 40px var(--space-5) 72px;
+  }
+}
+
+/* a11y: freeze the caret (kept visible, just not blinking) */
+@media (prefers-reduced-motion: reduce) {
+  .caret {
+    animation: none;
+  }
+}
+
+/* co-located keyframe (CSS Modules scope animation-name; a global keyframe
+   would never match the scoped reference) */
+@keyframes footer-blink {
+  0%,
+  48% {
+    opacity: 1;
+  }
+  52%,
+  100% {
+    opacity: 0;
+  }
+}

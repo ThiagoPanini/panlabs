@@ -30,4 +30,4 @@ Páginas de detalhe, nota/comentário, feature-request→issue, usuários único
 
 ## Sucesso do V1
 
-A landing no ar em `panlabs.tech`, com ≥2 soluções (epistemix, traveltogether) em cards que redirecionam de fato, métrica de clique funcionando — e o critério que o autor definiu: **um sistema visual que o agrade o suficiente para querer continuar.** Sem o design agradando, não se fala em evoluir.
+A landing no ar em `panlabs.tech`, com ≥2 soluções (ethitorial, travelmanager) em cards que redirecionam de fato, métrica de clique funcionando — e o critério que o autor definiu: **um sistema visual que o agrade o suficiente para querer continuar.** Sem o design agradando, não se fala em evoluir.

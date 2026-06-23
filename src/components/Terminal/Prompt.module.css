@@ -1,0 +1,28 @@
+.prompt {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--fs-hero-prompt);
+  color: var(--text-muted);
+}
+
+.user {
+  color: var(--color-terminal-green);
+  font-weight: var(--fw-semibold);
+}
+
+.colon {
+  color: var(--text-faint);
+}
+
+.tilde {
+  color: var(--color-terminal-blue);
+}
+
+.dollar {
+  color: var(--text-body);
+}
+
+/* the file the command reads — the one near-white token on the line */
+.arg {
+  color: var(--text-default);
+}

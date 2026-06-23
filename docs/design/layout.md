@@ -17,11 +17,30 @@ Estrutura da página, container, grid e breakpoints **as-built**. Os breakpoints
       <Suspense>
         <Catalog/>                 ← section, meta + grid de cards
       </Suspense>
+      <Manifesto/>                 ← camada 1: momento de marca + tenets
+      <DomainArchitecture/>        ← camada 2: pilares → domínio único
     </main>
+    <Footer/>                      ← camada 3: terminal (contentinfo, fora do <main>)
 ```
 
 O `<Suspense>` isola o catálogo (que faz fetch de vitalidade ao vivo no GitHub) para o hero **nunca
 esperar a rede** — o hero pinta na hora, o grid faz stream depois.
+
+## Camadas de scroll (abaixo do catálogo)
+
+A história do laboratório se revela conforme se **desce** a página — continuação nativa do topo, não
+redesenho. Três camadas, todas no mesmo container 1080px, separadas por `border-top` hairline:
+
+1. **Manifesto** — gradiente `ink-950 → ink-940`; momento de marca (anel + logo) + `cat manifesto.txt` +
+   grid 2-col de tenets. Ver [components/manifesto.md](components/manifesto.md).
+2. **DomainArchitecture** — `bg-root`; diagrama flex `920×340` (pilares → conectores → card de domínio).
+   Ver [components/domain-architecture.md](components/domain-architecture.md).
+3. **Footer** — `ink-940`; fechamento de terminal. Landmark `contentinfo`, **irmão** do `<main>`. Ver
+   [components/footer.md](components/footer.md).
+
+O movimento (reveal ao rolar + traço SVG) é o primitivo `Reveal` — ver
+[components/reveal.md](components/reveal.md). É **JS-gated** e honra reduced-motion por componente.
+
 
 ## Container
 
@@ -69,8 +88,9 @@ A ordem do grid é: cards reais (na ordem do array `solutions`) **+ 1 `Placehold
 | Largura | O que muda | Onde |
 |---|---|---|
 | `≤ 1023px` | grid 3 → **2 colunas** | `Catalog.module.css` |
+| `≤ 880px` | diagrama da arquitetura **empilha** (conectores somem) | `DomainArchitecture.module.css` |
 | `≤ 767px` | tagline do header **some** | `Header.module.css` |
-| `≤ 639px` | grid → **1 coluna**; padding lateral do catálogo → `--space-5`; hero `.inner` → `var(--space-10) var(--space-5)`; título do hero → `32px`/`-1px`; caret encolhe (`10×28`); CTA do card ganha `min-height: 44px` (alvo de toque) | `Catalog`, `HeroTerminal`, `SolutionCard` |
+| `≤ 639px` | grid → **1 coluna**; padding lateral do catálogo → `--space-5`; hero `.inner` → `var(--space-10) var(--space-5)`; título do hero → `32px`/`-1px`; caret encolhe (`10×28`); CTA do card ganha `min-height: 44px` (alvo de toque); camadas reduzem padding (Manifesto grid → 1 col, headings menores) | `Catalog`, `HeroTerminal`, `SolutionCard`, `Manifesto`, `DomainArchitecture`, `Footer` |
 
 Sequência de colunas do grid: **3 → 2 → 1**. Não há breakpoint acima de 1080px (o container trava a
 largura).

@@ -189,6 +189,10 @@
 
   /* ---- shadow ------------------------------------------------------------ */
   --shadow-card-hover: 0 20px 56px -22px rgba(124, 92, 246, 0.5);
+  /* camadas de scroll (manifesto / arquitetura) */
+  --shadow-domain-card: 0 20px 56px -26px rgba(124, 92, 246, 0.6); /* card do domínio  */
+  --shadow-logo-rest: 0 0 56px -12px rgba(155, 108, 240, 0.5); /* glow do logo — vale do pulso */
+  --shadow-logo-peak: 0 0 92px -2px rgba(155, 108, 240, 0.8); /* glow do logo — pico do pulso */
 
   /* ---- opacity ----------------------------------------------------------- */
   --opacity-tech-icon: 0.9;
@@ -200,6 +204,9 @@
   --duration-shot: 300ms;
   --duration-spark: 1100ms;
   --duration-blink: 1060ms;
+  --duration-reveal: 900ms; /* scroll reveal fade-up (camadas) */
+  --duration-draw: 1500ms; /* SVG stroke draw-on (anel, conectores) */
+  --duration-pulse: 3400ms; /* glow pulse do logo (momento de marca) */
 
   --easing-card: cubic-bezier(0.2, 0.7, 0.3, 1);
   --easing-standard: ease;

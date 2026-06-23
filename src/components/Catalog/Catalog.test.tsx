@@ -30,8 +30,8 @@ describe("Catalog", () => {
   it("renders the two real solutions plus the placeholder", async () => {
     render(await Catalog());
     expect(screen.getAllByRole("article")).toHaveLength(3);
-    expect(screen.getByRole("heading", { name: "epistemix" })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "traveltogether" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "ethitorial" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "travelmanager" })).toBeInTheDocument();
     expect(
       screen.getByRole("article", { name: "Próximo experimento a caminho" }),
     ).toBeInTheDocument();
@@ -39,14 +39,14 @@ describe("Catalog", () => {
 
   it("links real solutions directly and safely", async () => {
     render(await Catalog());
-    const cta = screen.getByRole("link", { name: /touch traveltogether/ });
-    expect(cta).toHaveAttribute("href", "/go/traveltogether");
+    const cta = screen.getByRole("link", { name: /touch travelmanager/ });
+    expect(cta).toHaveAttribute("href", "/go/travelmanager");
     expect(cta.getAttribute("rel")).toContain("noopener");
   });
 
-  it("shows live GitHub stars on the epistemix card (#12 tracer)", async () => {
+  it("shows live GitHub stars on the ethitorial card (#12 tracer)", async () => {
     stubFetch({
-      "/repos/ThiagoPanini/epistemix": { body: { stargazers_count: 99 } },
+      "/repos/ThiagoPanini/ethitorial": { body: { stargazers_count: 99 } },
       "/stats/commit_activity": { body: Array.from({ length: 52 }, (_, i) => ({ total: i })) },
     });
     render(await Catalog());
