@@ -27,7 +27,7 @@
 .shot {
   object-fit: cover;
   object-position: top center;
-  /* previewBlur 2.5 + darken 0.6 (Chosen defaults); base scale masks blur edges */
+  /* shot: blur 1.5 + brightness 0.76 (reduzido de Chosen 2.5); base scale mascara as bordas do blur */
   transform: scale(1.06);
   filter: blur(1.5px) brightness(0.76);
   transition: transform var(--duration-shot) var(--easing-standard);

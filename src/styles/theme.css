@@ -1,8 +1,10 @@
 /* =============================================================================
    panlabs — theme.css
-   Custom properties espelhando design-system/tokens.json.
-   Fonte-da-verdade: protótipo OFICIAL e único "Chosen" (panlabs.dc.html).
-   Tema único (escuro). Não há tema claro em Chosen — ver handoff.md (lacunas).
+   FONTE-DA-VERDADE viva dos design tokens (as-built). Chosen (.claude/design,
+   gitignored) é a origem creditada — não a verdade; tokens.json é só o snapshot
+   de origem. Documentação: docs/design/design-spec.md.
+   Camadas: primitive → semantic → component. Tema único (escuro).
+   @keyframes vivem em cada *.module.css (CSS Modules escopam animation-name).
    ============================================================================= */
 
 :root {
@@ -11,10 +13,9 @@
   --color-ink-940: #0a0b0d; /* fundo html/body global           */
   --color-ink-900: #0c0d11; /* superfície do card               */
 
-  /* ---- color · primitive · preview fallback ------------------------------ */
-  --color-shot-epistemix: #101826;
-  --color-shot-traveltogether: #1a1420;
-  --color-shot-querymind: #0d1a1a;
+  /* NB: a cor de fundo do preview por solução é EDITORIAL (data.shotBg em
+     src/data/solutions.ts), não um token — chega junto do screenshot no PR
+     que adiciona a Solução (ADR-0006). */
 
   /* ---- color · primitive · gray ------------------------------------------ */
   --color-gray-00: #ffffff;
