@@ -20,7 +20,7 @@ O terceiro item do grid do catálogo no V1 — **não é um Card** (não represe
 _Evite_: tratá-lo como Card ou como Solução; ele existe para não deixar o grid “mancar”, não para representar um produto.
 
 **URL-alvo** (`targetUrl`):
-Onde a Solução vive hoje (ex.: `https://epistemix.dev`, `https://traveltogether.thiagopanini.dev`). É um campo de config. Quando a Solução migrar de domínio (no repo dela), **só esse campo muda aqui**.
+Onde a Solução vive hoje (ex.: `https://ethitorial.panlabs.tech`, `https://travelmanager.panlabs.tech`). É um campo de config. Quando a Solução migrar de domínio (no repo dela), **só esse campo muda aqui**.
 
 **Redirect rastreado** (`/go/[slug]`):
 Route handler que grava o evento de clique (com timestamp) e responde 302 para a `targetUrl`. É a **única escrita** do panlabs e a única métrica que só ele pode medir.
@@ -36,7 +36,7 @@ Sinais factuais puxados do GitHub por Solução — ⭐ stars, atividade de comm
 As ~3 tecnologias que importam (ex.: `Next · FastAPI · Postgres`). **Curadas** na entrada — o GitHub só enxerga *linguagens* de arquivo, não frameworks, então não dá para automatizar honestamente.
 
 **status**:
-Ciclo de vida curado da Solução: `idea → alpha → beta → live → sunset`. No V1.0, só `live` (epistemix) e `beta` (traveltogether) aparecem como badge; `alpha`/`idea`/`sunset` ficam reservados (ver [ADR-0012](adr/0012-design-oficial-chosen-e-faseamento.md)).
+Ciclo de vida curado da Solução: `idea → alpha → beta → live → sunset`. No V1.0, só `live` (ethitorial) e `beta` (travelmanager) aparecem como badge; `alpha`/`idea`/`sunset` ficam reservados (ver [ADR-0012](adr/0012-design-oficial-chosen-e-faseamento.md)).
 
 ## Modelo de dados (esboço)
 

@@ -4,7 +4,7 @@
 
 ## Contexto
 
-O autor tem SaaS (epistemix, traveltogether, + futuras) espalhadas por domínios distintos e quer uma interface única que as exponha. A descrição inicial continha uma tensão: *"redirecionador Premium"* (manda o usuário embora) versus uma lista de features de **plataforma** (nota, comentário, feature-request, usuários únicos) que implicam dados próprios, identidade e moderação.
+O autor tem SaaS (ethitorial, travelmanager, + futuras) espalhadas por domínios distintos e quer uma interface única que as exponha. A descrição inicial continha uma tensão: *"redirecionador Premium"* (manda o usuário embora) versus uma lista de features de **plataforma** (nota, comentário, feature-request, usuários únicos) que implicam dados próprios, identidade e moderação.
 
 ## Decisão
 

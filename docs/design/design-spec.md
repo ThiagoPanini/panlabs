@@ -92,7 +92,7 @@ traduzir, não mudar caixa):
 | `em breve` | badge do slot do próximo experimento | sinal de "vindo" |
 | `// incubando o próximo experimento` | copy do slot | legenda do placeholder |
 
-Nomes de Solução são **lowercase** (`epistemix`, `traveltogether`) — não capitalizar.
+Nomes de Solução são **lowercase** (`ethitorial`, `travelmanager`) — não capitalizar.
 
 **Caveat de sincronia de copy (atenção do dono):** existem 3 variações próximas da tagline-mestra —
 o hero diz "soluções de **softwares**" ([`HeroTerminal.tsx`](../../src/components/HeroTerminal/HeroTerminal.tsx)),
