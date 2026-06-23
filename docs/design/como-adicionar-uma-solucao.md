@@ -16,7 +16,7 @@ Em [`src/data/solutions.ts`](../../src/data/solutions.ts), crie um `Solution` e 
 | Campo | O quê | Notas |
 |---|---|---|
 | `slug` | identificador URL | lowercase; vira `/go/{slug}` e o id da sparkline |
-| `name` | nome exibido | **lowercase** (`ethitorial`) — não capitalizar |
+| `name` | nome exibido | **lowercase** (`epistemix`) — não capitalizar |
 | `tagline` | uma linha lilás | curta, editorial |
 | `desc` | descrição | texto plano, ~2 linhas |
 | `url` | a **URL-alvo** (`targetUrl`) | para onde o `/go` redireciona; trocar de domínio = só este campo |

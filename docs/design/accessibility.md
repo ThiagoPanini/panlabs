@@ -50,6 +50,7 @@ protótipo Chosen**, que também porta o reveal no JS. Implicações:
   está no DOM para crawlers) e a maioria dos motores de busca executa JS. Mantido por fidelidade ao Chosen.
   Ver [components/reveal.md](components/reveal.md).
 
+
 ## Forced-colors (alto contraste)
 
 - A **marca** (logo) leva `forced-color-adjust: none` — exceção deliberada para o mark não virar um

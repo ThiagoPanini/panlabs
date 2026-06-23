@@ -113,7 +113,7 @@ Quatro valores mudaram; o resto é idêntico (com normalização cosmética de c
 
 | Delta | Chosen / ADR | as-built | Âncora | Classe |
 |---|---|---|---|---|
-| Composição | 3 cards (incl. `querymind`) em Chosen; ADR-0012 = 2 reais + 1 placeholder | 2 reais (`ethitorial`, `travelmanager`) + 1 `PlaceholderCard` | `Catalog.tsx:15-20`, `data/solutions.ts:68` | OK (segue ADR-0012) |
+| Composição | 3 cards (incl. `querymind`) em Chosen; ADR-0012 = 2 reais + 1 placeholder | 2 reais (`epistemix`, `traveltogether`) + 1 `PlaceholderCard` | `Catalog.tsx:15-20`, `data/solutions.ts:68` | OK (segue ADR-0012) |
 | `querymind` | 3º card (status `alpha/idea`, `shot-querymind`) | **removido**. _(Correção §8: **os 3** `--color-shot-*` eram vestigiais — não só o de querymind — pois o fundo do preview é `data.shotBg`. Todos **removidos** na Fase 3, Trilha A.)_ ✅ | `solutions.ts:27`, `theme.css:16-18` | `[Vestigial]` — resolvido (drift verificado: nenhum, ver §8) |
 | Meta da seção | `// 3 soluções no ar · preview ao vivo` | `// ${count} soluções no ar · preview ao vivo` com `count = live.length` (= 2) | `Catalog.tsx:14` | `[Forma]` (contagem dinâmica) |
 | Vitalidade | curada estática (V1.0) | **vitalidade GitHub ao vivo**: `Promise.all(solutions.map(resolveVitality))`, overlay sobre os valores curados, semântica [ADR-0013](../adr/0013-semantica-vitalidade-live-commits-prs.md) | `Catalog.tsx:9`, `lib/github.ts` | `[Contradiz ADR]` (fase, ver 4.2) |

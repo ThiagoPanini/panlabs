@@ -41,6 +41,7 @@ redesenho. Três camadas, todas no mesmo container 1080px, separadas por `border
 O movimento (reveal ao rolar + traço SVG) é o primitivo `Reveal` — ver
 [components/reveal.md](components/reveal.md). É **JS-gated** e honra reduced-motion por componente.
 
+
 ## Container
 
 `--size-container-max: 1080px`, centralizado (`margin: 0 auto`). Aplicado ao `.inner` do hero e ao
