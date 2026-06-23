@@ -15,6 +15,10 @@ _Evite_: "app do panlabs" — as soluções não pertencem ao panlabs.
 **Card**:
 A representação visual de uma **Solução** na landing. Prioridade, nesta ordem: **(1)** o **produto** — nome, o que é e um jeito de entrar (o herói do card); **(2)** a ação **"visitar"**; **(3)** **vitalidade** como prova-de-vida *secundária e discreta*. **Quais** indicadores, **quanto**, **onde** e com que **tratamento** são **forma — decisão do design, não deste documento.** Um **preview/render visual do produto** (screenshot, faux-UI, embed, comportamento de hover) é **opcional e não exigido**: o card é completo só com texto + ação, e *se* e *como* mostrar um visual fica **em aberto, sem enforcement** — decisão do design. O design oficial (Chosen) optou por incluí-lo — **preview de 148px (assinatura do card)**, ver [ADR-0012](adr/0012-design-oficial-chosen-e-faseamento.md). Set de indicadores candidatos em [ADR-0005](adr/0005-indicadores.md); prioridade em [ADR-0011](adr/0011-produto-primeiro-indicadores-secundarios.md).
 
+**Slot do próximo experimento** (código: `PlaceholderCard`):
+O terceiro item do grid do catálogo no V1 — **não é um Card** (não representa uma Solução). É um placeholder **inerte** (sem link, sem stats, sem CTA) que se apresenta como o *rascunho* de uma Solução futura: badge "em breve" no lugar da pílula de status e linhas/chips skeleton. Anuncia "próximo experimento a caminho" **sem fingir** vitalidade, redirect ou status reais — preserva a invariante de honestidade ([ADR-0012](adr/0012-design-oficial-chosen-e-faseamento.md)).
+_Evite_: tratá-lo como Card ou como Solução; ele existe para não deixar o grid “mancar”, não para representar um produto.
+
 **URL-alvo** (`targetUrl`):
 Onde a Solução vive hoje (ex.: `https://epistemix.dev`, `https://traveltogether.thiagopanini.dev`). É um campo de config. Quando a Solução migrar de domínio (no repo dela), **só esse campo muda aqui**.
 

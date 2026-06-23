@@ -34,3 +34,11 @@ Onde Chosen e os docs de concepção (2026-06-21) divergem, **o design tem prior
 - **Honrar o ADR-0005 removendo commits/PRs da face** — contraria o design oficial; o autor optou pelo literal.
 - **Desktop-only literal no V1.0** — Chosen não é responsivo, mas o link é público e credibilidade é o valor declarado ([ADR-0007](0007-audiencia-e-posicionamento.md)).
 - **3º card como querymind real ou teaser com stats** — fingir vitalidade/redirect de algo inexistente fere a honestidade; placeholder anônimo resolve.
+
+## Reconciliação as-built (2026-06-23)
+
+Sabatina de oficialização do design (Fase 2). Onde o as-built divergiu da **letra** deste ADR, registra-se aqui: a **intenção e as invariantes** foram preservadas; a **forma** evoluiu (princípio do [ADR-0011](0011-produto-primeiro-indicadores-secundarios.md)). O original acima fica como registro histórico.
+
+- **§3 — "Slot do próximo experimento" (era "placeholder anônimo `// TODO`").** O 3º card enviado tem badge **"em breve"** (na posição da pílula de status) e linhas/chips **skeleton com shimmer**, em vez do `// TODO` anônimo de zero-motion. A **invariante é preservada**: segue **inerte** (sem link, sem stats, sem CTA) e **não finge** ser Solução real — o badge não é um status real (`live`/`beta`) e o skeleton não são dados falsos. As restrições literais "sem badge" e "zero motion" ficam **superadas** pela forma, que comunica "próximo experimento a caminho" melhor que um slot morto. Termo canônico no [CONTEXT.md](../CONTEXT.md); identificador de código: `PlaceholderCard`.
+
+- **§2 — O faseamento V1.0/V1.1 colapsou na implementação.** Em vez de "lançar V1.0 e depois adicionar o backend V1.1", o as-built embarca a **superfície completa de uma vez** (`/go/[slug]` + camada de Postgres + vitalidade *live* do GitHub) com **degradação graciosa**: o redirect `/go` sempre responde e só a **gravação do clique** no-opa quando falta `DATABASE_URL`; a vitalidade cai para os valores **curados** quando falta `GITHUB_TOKEN`/rede. A fronteira de fase virou, na prática, um **toggle de infra** (presença de `DATABASE_URL`/`GITHUB_TOKEN` no deploy), não um marco de release — "V1.0/V1.1" permanecem como marcos **históricos** de planejamento. Consequência de forma: o CTA do card aponta para `/go/[slug]` (redirect rastreado, nova aba), **não** o link direto descrito em §2.

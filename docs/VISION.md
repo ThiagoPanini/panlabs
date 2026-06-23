@@ -22,7 +22,7 @@ O repo de cada solução é a **fonte da verdade** sobre ela (seu domínio, sua 
 
 - Uma **landing**: hero + grid de cards.
 - **Card** por solução: prioriza, nesta ordem, **(1) o produto** — o que é e um jeito de entrar (o herói do card); **(2)** a ação "visitar"; **(3) vitalidade** como prova-de-vida discreta. *Quais* sinais e *como/onde* exibi-los é **forma — decisão do design**; um **preview/render visual do produto é forma — decisão do design**; o design oficial (Chosen) fez do **preview de 148px a assinatura do card**, então no V1 ele existe (set candidato em [CONTEXT.md](CONTEXT.md) e [ADR-0005](adr/0005-indicadores.md); prioridade em [ADR-0011](adr/0011-produto-primeiro-indicadores-secundarios.md); forma em [ADR-0012](adr/0012-design-oficial-chosen-e-faseamento.md)).
-- **Redirect rastreado** `/go/[slug]` → 302 para a URL-alvo da solução (a única escrita do app — no **V1.1** do faseamento; no V1.0 o CTA linka direto, ver [ADR-0012](adr/0012-design-oficial-chosen-e-faseamento.md)).
+- **Redirect rastreado** `/go/[slug]` → 302 para a URL-alvo da solução (a única escrita do app). No as-built o CTA do card **já aponta para `/go`**; a *gravação* do clique depende de Postgres configurado no deploy (degradação graciosa) — ver a "Reconciliação as-built" no [ADR-0012](adr/0012-design-oficial-chosen-e-faseamento.md).
 
 ## Fora de escopo no V1
 

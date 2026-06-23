@@ -8,7 +8,7 @@ Orientação de domínio antes de qualquer trabalho substantivo:
 - [docs/VISION.md](docs/VISION.md) — o que é, posicionamento, escopo e critério de sucesso do V1.
 - [docs/adr/](docs/adr/README.md) — decisões de arquitetura (0001–0013).
 
-Design oficial ("Chosen") e faseamento **V1.0 visual / V1.1 backend** em [ADR-0012](docs/adr/0012-design-oficial-chosen-e-faseamento.md). Onde o design contraria um ADR sobre *forma*, **o design vence** ([ADR-0011](docs/adr/0011-produto-primeiro-indicadores-secundarios.md)); ADRs seguem mandando em *intenção e invariantes*.
+Design oficial ("Chosen") e faseamento **V1.0 visual / V1.1 backend** em [ADR-0012](docs/adr/0012-design-oficial-chosen-e-faseamento.md). Onde o design contraria um ADR sobre *forma*, **o design vence** ([ADR-0011](docs/adr/0011-produto-primeiro-indicadores-secundarios.md)); ADRs seguem mandando em *intenção e invariantes*. O contrato de design **as-built** (tokens, layout, componentes, a11y) vive em [docs/design/](docs/design/README.md) — leia antes de qualquer trabalho visual/UI.
 
 ## Agent skills
 
@@ -23,3 +23,7 @@ Vocabulário canônico verbatim: `needs-triage`, `needs-info`, `ready-for-agent`
 ### Domain docs
 
 Single-context; os docs de domínio moram em `docs/` (não na raiz). See `docs/agents/domain.md`.
+
+### Design system
+
+Contrato de design **as-built** em `docs/design/` (fonte-da-verdade = código; Chosen é origem creditada, gitignored). Token, não literal; keyframes co-localizadas; reduced-motion por componente. See `docs/agents/design.md`.
