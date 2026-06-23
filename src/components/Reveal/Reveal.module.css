@@ -1,0 +1,27 @@
+/* Scroll reveal: hidden + nudged down until `data-shown` flips (set by the
+   useReveal IntersectionObserver), then it eases up into place. JS-gated like
+   the Chosen prototype; reduced-motion below shows the final state outright. */
+.rv {
+  --reveal-shift: 26px;
+  opacity: 0;
+  transform: translateY(var(--reveal-shift));
+  transition:
+    opacity var(--duration-reveal) var(--easing-standard),
+    transform var(--duration-reveal) var(--easing-card);
+}
+
+.rv[data-shown="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+/* a11y: nothing disappears — the content sits in its final, legible state with
+   no motion. */
+@media (prefers-reduced-motion: reduce) {
+  .rv,
+  .rv[data-shown="true"] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

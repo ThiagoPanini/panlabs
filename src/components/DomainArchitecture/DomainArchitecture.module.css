@@ -1,0 +1,292 @@
+.section {
+  background: var(--bg-root);
+  border-top: var(--border-w-hairline) solid var(--border-subtle);
+}
+
+.inner {
+  max-width: var(--size-container-max);
+  margin: 0 auto;
+  padding: var(--space-24) var(--space-10);
+}
+
+/* ---- section intro ------------------------------------------------------- */
+.eyebrowRow {
+  margin-bottom: var(--space-2);
+}
+
+.eyebrow {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--fs-section-meta);
+  letter-spacing: 0.6px;
+  color: var(--text-faint);
+}
+
+.headingRow {
+  margin-bottom: var(--space-3-5);
+}
+
+.heading {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 30px;
+  font-weight: var(--fw-bold);
+  letter-spacing: -0.6px;
+  color: var(--text-strong);
+}
+
+.ledeRow {
+  margin-bottom: var(--space-15);
+}
+
+.lede {
+  max-width: 640px;
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--fs-hero-lede);
+  line-height: var(--lh-hero-lede);
+  color: var(--text-body);
+}
+
+/* ---- diagram: pillars → connectors → domain ------------------------------ */
+.diagram {
+  display: flex;
+  align-items: stretch;
+  max-width: 920px;
+  height: 340px;
+  margin: 0 auto;
+}
+
+.pillars {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-3);
+  width: 340px;
+}
+
+.pillar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 96px;
+  padding: var(--space-3-5) var(--space-4-5);
+  background: var(--bg-surface);
+  border: var(--border-w-hairline) solid var(--border-default);
+  border-radius: 12px;
+}
+
+.pillarHead {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 7px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  flex: none;
+  border-radius: var(--radius-full);
+}
+
+.dotMagenta {
+  background: var(--color-brand-magenta);
+  box-shadow: 0 0 12px var(--color-brand-magenta);
+}
+
+.dotViolet {
+  background: var(--color-brand-violet);
+  box-shadow: 0 0 12px var(--color-brand-violet);
+}
+
+.dotBlue {
+  background: var(--color-brand-blue);
+  box-shadow: 0 0 12px var(--color-brand-blue);
+}
+
+.pillarName {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: var(--fw-semibold);
+  color: var(--text-default);
+}
+
+.pillarDetail {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+.connectors {
+  width: 200px;
+  height: 340px;
+  flex: none;
+  overflow: visible;
+}
+
+/* each line draws from the pillar edge to the converging node on reveal */
+.connector {
+  --len: 340;
+  opacity: 0.75;
+  stroke-dasharray: var(--len);
+  stroke-dashoffset: var(--len);
+  transition: stroke-dashoffset var(--duration-draw) var(--easing-standard) 0.1s;
+}
+
+.diagram[data-shown="true"] .connector {
+  stroke-dashoffset: 0;
+}
+
+.connectorMagenta {
+  stroke: var(--color-brand-magenta);
+}
+
+.connectorViolet {
+  stroke: var(--color-brand-violet);
+}
+
+.connectorBlue {
+  stroke: var(--color-brand-blue);
+}
+
+.node {
+  fill: var(--color-brand-violet-light);
+}
+
+/* ---- domain card --------------------------------------------------------- */
+.domain {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.domainLabel {
+  margin-bottom: var(--space-2-5);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-faint);
+}
+
+.domainCard {
+  overflow: hidden;
+  background: var(--bg-surface);
+  border: var(--border-w-hairline) solid var(--color-hover-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-domain-card);
+}
+
+.domainCardHead {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: var(--space-4) var(--space-4-5);
+  /* literal consciente: brand wash (magenta→violet→blue) at low alpha — a
+     translucent tint of --gradient-brand; no token mirror (effect-specific) */
+  background: linear-gradient(
+    120deg,
+    rgba(196, 79, 208, 0.2),
+    rgba(139, 92, 246, 0.15),
+    rgba(61, 155, 224, 0.18)
+  );
+  border-bottom: var(--border-w-hairline) solid var(--border-subtle);
+}
+
+.domainLogo {
+  width: 30px;
+  height: 30px;
+  flex: none;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+}
+
+.domainName {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: var(--fw-bold);
+  letter-spacing: -0.5px;
+  color: var(--text-max);
+}
+
+.domainCardBody {
+  padding: var(--space-4) var(--space-4-5);
+}
+
+.domainNote {
+  margin: 0 0 var(--space-3);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.chips {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1-5);
+  padding: 5px var(--space-2-5);
+  background: var(--bg-chip);
+  border: var(--border-w-hairline) solid var(--border-chip);
+  border-radius: var(--radius-chip);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-chip);
+}
+
+.chipDot {
+  width: var(--size-status-dot);
+  height: var(--size-status-dot);
+  border-radius: var(--radius-full);
+}
+
+.chipDotLive {
+  background: var(--color-terminal-green);
+  box-shadow: 0 0 8px var(--color-terminal-green);
+}
+
+.chipDotPreview {
+  background: var(--color-brand-violet-light);
+}
+
+/* ---- responsive ---------------------------------------------------------- */
+/* stack the diagram before the fixed row (340 + 200 + card) can overflow */
+@media (max-width: 880px) {
+  .diagram {
+    flex-direction: column;
+    height: auto;
+    gap: var(--space-4-5);
+  }
+
+  .pillars {
+    width: 100%;
+  }
+
+  .connectors {
+    display: none;
+  }
+}
+
+@media (max-width: 639px) {
+  .inner {
+    padding: var(--space-15) var(--space-5);
+  }
+
+  .heading {
+    font-size: 26px;
+  }
+}
+
+/* a11y: connectors shown already-drawn (no stroke animation) */
+@media (prefers-reduced-motion: reduce) {
+  .connector {
+    stroke-dashoffset: 0;
+    transition: none;
+  }
+}
