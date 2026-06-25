@@ -4,10 +4,10 @@
 
 ## Contexto
 
-O plano inicial era padronizar tudo em subdomínios de `panlabs.tech` (ex.: `epistemix.panlabs.tech`). A investigação revelou que:
+O plano inicial era padronizar tudo em subdomínios de `panlabs.tech` (ex.: `ethitorial.panlabs.tech`). A investigação revelou que:
 
-- **epistemix** já vive num apex próprio (`epistemix.dev`), com `www./api./preview./painel.`, sessões `better-auth` e login OAuth.
-- **traveltogether** vive em `traveltogether.thiagopanini.dev`.
+- **ethitorial** já vive num apex próprio (`ethitorial.dev`), com `www./api./preview./painel.`, sessões `better-auth` e login OAuth.
+- **travelmanager** vive em `travelmanager.thiagopanini.dev`.
 - `panlabs.tech` ainda não foi adquirido.
 
 Migrar uma app **viva e autenticada** é a operação mais arriscada do projeto: 301 do domínio antigo, troca de cookie-domain (derruba sessões), redirect URIs do OAuth, CORS do `api.`, base URL de tipos gerados, e nova zona Cloudflare.

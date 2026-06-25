@@ -99,7 +99,7 @@ traduzir, não mudar caixa):
 | `keep building and sharing` | Footer headline (caret piscando) | fechamento — **sem CTA** |
 | `dark-native · pt-BR · Manrope + JetBrains Mono · sem CDN` | Footer colofão | colofão honrando os inegociáveis |
 
-Nomes de Solução são **lowercase** (`epistemix`, `traveltogether`) — não capitalizar. A copy das camadas
+Nomes de Solução são **lowercase** (`ethitorial`, `travelmanager`) — não capitalizar. A copy das camadas
 (tenets do Manifesto, pilares da arquitetura) é **editorial inline** no componente, não token.
 
 **Caveat de sincronia de copy (atenção do dono):** existem 3 variações próximas da tagline-mestra —
