@@ -8,7 +8,7 @@ This repo is **single-context**. Note the docs live under `docs/` (not at the re
 
 - **`docs/CONTEXT.md`** — the glossary + invariants (the project's shared domain language).
 - **`docs/VISION.md`** — what panlabs is, its scope, and the V1 success criterion.
-- **`docs/adr/`** — read ADRs that touch the area you're about to work in (`docs/adr/README.md` is the index, 0001–0012).
+- **`docs/adr/`** — read ADRs that touch the area you're about to work in (`docs/adr/README.md` is the index, 0001–0014).
 
 If any of these files don't exist, **proceed silently**. Don't flag their absence; don't suggest creating them upfront. The `/domain-modeling` skill (reached via `/grill-with-docs` and `/improve-codebase-architecture`) creates them lazily when terms or decisions actually get resolved.
 
@@ -25,7 +25,7 @@ Single-context repo, docs nested under `docs/`:
 │   └── adr/
 │       ├── README.md
 │       ├── 0001-vitrine-agregador-read-only.md
-│       └── … 0012-design-oficial-chosen-e-faseamento.md
+│       └── … 0014-autonomia-total-dos-agentes.md
 └── src/                              ← (V1.0 onwards)
 ```
 

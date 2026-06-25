@@ -2,13 +2,13 @@ name: pr-checks
 
 # Portão de qualidade antes do merge na main — o único gate deste repo solo.
 # Dispara no push das branches de trabalho (inclui worktree/** geradas por
-# agente). Quando todos os checks ficam verdes, open-pr abre o PR para a main;
-# o merge continua humano.
+# agente). Quando todos os checks ficam verdes, open-pr abre o PR para a main.
+# Merge autônomo no verde — o agente mergeia diretamente sem esperar operador
+# (ADR-0014).
 #
-# CD NÃO vive aqui: o deploy em produção é feito pelo Coolify (GitHub App) no
-# push à main — ele puxa o repo e builda o Dockerfile da raiz (ADR-0004). Por
-# isso não há workflow de deploy; o deploy.yml herdado do outro projeto (build
-# GHCR + webhook) não se aplica a este topology.
+# CD: deploy.yml dispara no push à main e aciona a API do Coolify para buildar
+# e subir o novo commit (ADR-0004). O Coolify clona o repo e builda o
+# Dockerfile da raiz — não há build de imagem GHCR neste pipeline.
 
 on:
   push:
@@ -96,6 +96,6 @@ jobs:
             --base main \
             --head "$BRANCH" \
             --title "$title" \
-            --body "PR aberto automaticamente apos checks verdes (pr-checks). Merge continua humano."
+            --body "PR aberto automaticamente após checks verdes. Merge autônomo no verde — agente faz o merge diretamente sem esperar operador."
 
           echo "::notice::PR aberto: $BRANCH -> main"
