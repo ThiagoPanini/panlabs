@@ -65,4 +65,23 @@ export const travelmanager: Solution = {
   shotBg: "#1a1420",
 };
 
-export const solutions: Solution[] = [ethitorial, travelmanager];
+export const luc: Solution = {
+  slug: "luc",
+  name: "LUC (life under control)",
+  tagline: "Organizar a vida adulta a dois",
+  desc: "Portal doméstico para casais: finanças, saúde, carro e gastronomia reunidos num cockpit com acesso simétrico — o mesmo dado, para os dois, sem hierarquia.",
+  url: "https://luc.panlabs.tech",
+  repo: "ThiagoPanini/life-under-control",
+  status: "beta",
+  tech: [
+    { label: "Next.js", slug: "nextdotjs" },
+    { label: "Postgres", slug: "postgresql" },
+    { label: "TS", slug: "typescript" },
+  ],
+  stats: { stars: 0, commits: 8, prs: 6 },
+  weeks: [0, 0, 1, 0, 1, 2, 1, 0, 2, 1, 3, 2, 1, 3, 2, 4, 3, 2, 4, 3, 5, 4, 3, 5, 4, 6],
+  shot: "/assets/shot-luc.jpg",
+  shotBg: "#0f1a14",
+};
+
+export const solutions: Solution[] = [ethitorial, travelmanager, luc];

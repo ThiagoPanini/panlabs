@@ -24,14 +24,15 @@ describe("Catalog", () => {
 
   it("shows section meta with the live count", async () => {
     render(await Catalog());
-    expect(screen.getByText(/\/\/ 2 soluções no ar/)).toBeInTheDocument();
+    expect(screen.getByText(/\/\/ 3 soluções no ar/)).toBeInTheDocument();
   });
 
-  it("renders the two real solutions plus the placeholder", async () => {
+  it("renders the three real solutions plus the placeholder", async () => {
     render(await Catalog());
-    expect(screen.getAllByRole("article")).toHaveLength(3);
+    expect(screen.getAllByRole("article")).toHaveLength(4);
     expect(screen.getByRole("heading", { name: "ethitorial" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "travelmanager" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "LUC (life under control)" })).toBeInTheDocument();
     expect(
       screen.getByRole("article", { name: "Próximo experimento a caminho" }),
     ).toBeInTheDocument();
